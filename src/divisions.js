@@ -1,10 +1,21 @@
 /**
  * @file Houses the class definitions for Divisions.
  */
+/**
+ * Divisions module.
+ *
+ * @module flag-generator/divisions
+ */
 import { randomHex } from './utilities';
 import { settings } from './index';
 
-/** Class representing the Fesses division pattern. */
+/**
+ * Fesses pattern.
+ *
+ * @class
+ * @classdesc The Fesses pattern describes one or more vertical divisions of the field.
+ * @todo Figure out a better way to handle colors.
+ */
 export class Fesses {
     /**
      * Create fesses.
@@ -12,7 +23,6 @@ export class Fesses {
      * @example
      * // Returns a Fesses instance.
      * const fesses = new Fesses(2, '#3febeb');
-     * @class
      * @param {number} fessCount - The number of fesses to create.
      * @param {string} seedColor - A string representing a hexadecimal color value.
      */
@@ -75,3 +85,126 @@ export class Fesses {
 
    }
 }
+
+/** Pales pattern.
+ *
+ * @class
+ * @classdesc The Pales pattern describes one or more horizontal divisions of the field.
+ * @todo Write the Pales class.
+ */
+export class Pales {}
+
+/** Saltire pattern.
+ *
+ * @class
+ * @classdesc The Saltire pattern describes two diagonal lines crossing in the center of the field. An X pattern.
+ * @todo Write the Saltire class.
+ */
+export class Saltire {}
+
+/** Pall pattern.
+ *
+ * @class
+ * @classdesc The Pall pattern describes a Y shape on the field, typically oriented so the top of the Y is on the left of the field.
+ * @todo Write the Pall class.
+ */
+export class Pall {}
+
+/** Border pattern.
+ *
+ * @class
+ * @classdesc The Border pattern on a flag describes a border around each edge of the field.
+ * @todo Write the Border class.
+ */
+export class Border {
+    /**
+     * Creates Border.
+     *
+     * @example
+     * // Instantiates a Border
+     * const border = new Border('#ffffff', 20);
+     * @param {string} color - A hexadecimal color value.
+     * @param {number} borderWidth - A number representing the size of the border. This is used for coordinate drawing on a canvas for now.
+     */
+    constructor(color, borderWidth) {
+        this.color = color;
+        this.borderWidth = borderWidth;
+    }
+
+    /**
+     * Draws the Border pattern on a canvas.
+     *
+     * @example
+     * // Draws the Border pattern.
+     * border.drawBorder(ctx);
+     * @param {object} ctx - An object containing a canvas context.
+     */
+    drawBorder(ctx) {
+        // Set the line width
+        ctx.lineWidth = this.borderWidth;
+        ctx.strokeStyle = this.color;
+        ctx.strokeRect(0, 0, settings.flagWidth, settings.flagHeight);
+    }
+}
+
+/** Chevron pattern.
+ *
+ * @class
+ * @classdesc The Chevron pattern describes two diagonal lines beginning from two corners and stopping in the center of the field where they meet.
+ * @todo Write the Chevron class.
+ */
+export class Chevron {}
+
+/**
+ * Bends pattern.
+ *
+ * @class
+ * @classdesc The Bends pattern describes a single diagonal line in either the dexter or sinister direction.
+ * @todo Write the Bends class.
+ */
+export class Bends {}
+
+/**
+ * Canton pattern.
+ *
+ * @class
+ * @classdesc The Canton pattern describes a small quarter of the flag, usually the top dexter quarter. It is often filled by a pattern, like in the flag of the United States, or an entire flag in the case of many British colony flags.
+ * @todo Write the Canton class.
+ */
+export class Canton {}
+
+/**
+ * Cross pattern.
+ *
+ * @class
+ * @classdesc The Cross pattern describes two intersecting lines across the field. There are many variants that may make good sub-classes: NordicCross, GreekCross, SymmetricCross, etc...
+ * @todo Write the Cross class.
+ */
+export class Cross {}
+
+/**
+ * Lozenge pattern.
+ *
+ * @class
+ * @classdesc The Lozenge pattern describes a diamond on the field with each intersection of lines touching the edge of the field.
+ * @todo Write the Lozenge class.
+ */
+export class Lozenge {}
+
+/**
+ * Fusil pattern.
+ *
+ * @class
+ * @classdesc The Fusil pattern is much like the Lozenge pattern, except that the horizontal intersections to not touch the edge of the field. A skinny diamond.
+ * @todo Write the Fusil class.
+ */
+export class Fusil {}
+
+/**
+ * CenterShape pattern.
+ *
+ * @class
+ * @classdesc The CenterShape pattern is a generic pattern that simply creates a shape on the center of the field. Think of the Japanese flag.
+ * @todo Write the CenterShape class.
+ */
+export class CenterShape {}

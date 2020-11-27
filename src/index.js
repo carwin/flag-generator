@@ -1,8 +1,13 @@
 /**
  * @file Flag generator base.
  */
+/**
+ * Flag module.
+ *
+ * @module flag-generator
+ */
 import * as utilities from './utilities';
-import { Fesses } from './divisions';
+import * as divisions from './divisions';
 
 // Ideas:
 //   - Take the flag width and height and divide it into 9 parts (rule of 3rds). Process each of the 9 parts individually for color
@@ -46,6 +51,8 @@ import seedrandom from 'seedrandom';
 /** The current generator settings. */
 export let settings = {
     seed: false,
+    flagWidth: 500,
+    flagHeight: 300,
 }
 
 // Prototypes / Classes
@@ -84,9 +91,11 @@ class Flag {
 
         // New division test area:
         console.log('Draw fesses!')
-        const fesses = new Fesses(2, '#3febeb');
-
+        const fesses = new divisions.Fesses(2, '#3febeb');
         fesses.drawFesses(ctx, 500);
+
+        const borders = new divisions.Border('#bceaa7', 25);
+        borders.drawBorder(ctx);
 
         // This bit here is the original way I was drawin divisions.
         // If we were passed an array of divisions, let's draw them.

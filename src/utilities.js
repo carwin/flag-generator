@@ -3,6 +3,12 @@
  */
 
 /**
+ * Utilities for flag generation.
+ *
+ * @module flag-generator/utilities
+ */
+
+/**
  * Generate a random hex color based on the seed.
  *
  * @example
