@@ -1,0 +1,33 @@
+{
+  "name": "flag-generator",
+  "version": "1.0.0",
+  "description": "A flag generator",
+  "main": "dist/flag-gen.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "webpack --config webpack.dev.babel.js",
+    "build:prod": "webpack --config webpack.prod.babel.js",
+    "watch": "webpack --watch --config webpack.dev.babel.js"
+  },
+  "keywords": [
+    "flag"
+  ],
+  "author": "Carwin Young",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/register": "^7.12.1",
+    "babel-loader": "^8.2.1",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "^7.14.0",
+    "eslint-loader": "^4.0.2",
+    "lodash": "^4.17.20",
+    "seedrandom": "^3.0.5",
+    "sockjs-client": "^1.5.0",
+    "webpack": "^5.6.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-merge": "^5.4.0"
+  }
+}
