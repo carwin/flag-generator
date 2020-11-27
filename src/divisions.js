@@ -42,7 +42,6 @@ export class Fesses {
     * @todo  The gapPercentage cannot exceed a certain value, but I don't know how to calculate a stop. Keep it below 20. It's probably something like: the gap percentage cannot exceed a certain value based on the number of gaps.
     */
    drawFesses(ctx, containerWidth = 500, gapPercentage = 0) {
-       console.log(typeof ctx);
        let singleGapWidth,
            singleGapPercentage,
            totalGapPercent,
@@ -98,9 +97,122 @@ export class Pales {}
  *
  * @class
  * @classdesc The Saltire pattern describes two diagonal lines crossing in the center of the field. An X pattern.
- * @todo Write the Saltire class.
  */
-export class Saltire {}
+export class Saltire {
+    /**
+     * Creates a Saltire.
+     *
+     * @example
+     * // Instantiates a Saltire without a border.
+     * const saltire = new Saltire();
+     * // Instantiates a Saltire with a border.
+     * const saltireWithBorder = new Saltire(true);
+     * @param {boolean} border - A boolean value to decide whether or not to draw a border based on the global seed setting.
+     * @param {number} borderWidth - A number value to use when generating border width. This number is used in addition
+     * to the randomly generated border width determined by the seed.
+     */
+    constructor(border = false, borderWidth = 0) {
+        this.color = this.generateSaltireColor();
+        this.border = border;
+        this.borderWidth = borderWidth;
+        this.borderColor = this.generateSaltireColor(settings.seed * .1010220);
+    }
+
+    /**
+     * Generates a percentage width for the Saltire lines based on the seed.
+     *
+     * @example
+     * // Returns 81, meaning 81%
+     * saltire.generateWidth(0.8112494706388412);
+     * @param {number} seed - A pseudo-random string generated based on a string value.
+     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
+     * @returns {number} A whole number used elsewhere as a percentage value.
+     */
+    generateSaltireWidth(seed = settings.seed) {
+       return Math.round(seed * 100);
+    }
+
+    /**
+     * Generate a hex color for the Saltire.
+     *
+     * @example
+     * // Returns a random hexadecimal color string.
+     * const hexColor = this.generateSaltireColor(.9823719751231457);
+     * @param {number} seed - A pseudo-random string generated based on a string value.
+     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()}
+     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
+     * @returns {string} A hexadecimal color value.
+     * @todo I seem to be creating a lot of these color functions. I bet I can extrapolate it for re-use.
+     */
+    generateSaltireColor(seed = settings.seed) {
+       let color = randomHex(seed * .5678);
+       return color;
+    }
+
+    /**
+     * Generate border information for the Saltire.
+     *
+     * @example
+     * // Returns an object with width and color keys.
+     * const border = this.generateSaltireBorder(.123747918512398745);
+     * @param {number} seed - A pseudo-random string generated based on a string value.
+     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
+     * @returns {object} An object containing width and color keys.
+     */
+    generateSaltireBorder(seed = settings.seed) {
+        let borderWidth = this.borderWidth;
+        let borderInfo = {};
+
+        borderInfo.width = borderWidth + this.generateSaltireWidth((seed * .1234));
+        borderInfo.color = this.borderColor;
+
+        return borderInfo;
+    }
+
+    /**
+     * Draws the Saltire on the given canvas.
+     *
+     * @example
+     * // Draws a Saltire on the canvas.
+     * const saltire = new Saltire();
+     * saltire.drawSaltire(ctx);
+     * @param {object} ctx - A canvas Context.
+     */
+    drawSaltire(ctx) {
+        const saltireWidth = this.generateSaltireWidth();
+
+        // Handle any borders first. We draw the borders as a background.
+        if (this.border) {
+            const border = this.generateSaltireBorder();
+            ctx.beginPath();
+            ctx.moveTo(0, 0); // Move to top left corner. Start here.
+            ctx.lineTo(settings.flagWidth, settings.flagHeight);
+
+            ctx.moveTo(0, settings.flagHeight);
+            ctx.lineTo(settings.flagWidth, 0);
+
+            ctx.strokeStyle = border.color;
+            ctx.lineWidth = saltireWidth + (border.width * 2);
+            ctx.stroke();
+        }
+
+        // Now draw the main Saltire.
+        ctx.beginPath();
+
+        // First line of the X
+        ctx.moveTo(0, 0); // Move to top left corner. Start here.
+        ctx.lineTo(settings.flagWidth, settings.flagHeight);
+
+        // Second line of the X
+        ctx.moveTo(0, settings.flagHeight);
+        ctx.lineTo(settings.flagWidth, 0);
+
+        // Stroke it.
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = saltireWidth;
+        ctx.stroke();
+    }
+}
 
 /** Pall pattern.
  *
@@ -114,7 +226,9 @@ export class Pall {}
  *
  * @class
  * @classdesc The Border pattern on a flag describes a border around each edge of the field.
- * @todo Write the Border class.
+ * <br>
+ * If multiple Divisions are ever combined on a flag, the Border pattern should likely be
+ * drawn last to provide a frame effect.
  */
 export class Border {
     /**
@@ -122,15 +236,29 @@ export class Border {
      *
      * @example
      * // Instantiates a Border
-     * const border = new Border('#ffffff', 20);
-     * @param {string} color - A hexadecimal color value.
+     * const border = new Border(20);
      * @param {number} borderWidth - A number representing the size of the border. This is used for coordinate drawing on a canvas for now.
+     * @todo Handle border width more elegantly than taking a flat value from the caller.
      */
-    constructor(color, borderWidth) {
-        this.color = color;
+    constructor(borderWidth) {
+        this.color = this.generateBorderColor();
         this.borderWidth = borderWidth;
     }
-
+    /**
+     * Generate a hex color for the Border.
+     *
+     * @example
+     * // Returns a random hexadecimal color string.
+     * const hexColor = this.generateBorderColor(.9823719751231457);
+     * @param {number} seed - A pseudo-random string generated based on a string value.
+     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()}
+     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
+     * @returns {string} A hexadecimal color value.
+     * @todo I seem to be creating a lot of these color functions. I bet I can extrapolate it for re-use.
+     */
+    generateBorderColor(seed = settings.seed) {
+        return randomHex(seed * .7039);
+    }
     /**
      * Draws the Border pattern on a canvas.
      *
@@ -208,3 +336,12 @@ export class Fusil {}
  * @todo Write the CenterShape class.
  */
 export class CenterShape {}
+
+/**
+ * Quarterly pattern.
+ *
+ * @class
+ * @classdesc The Quarterly pattern describes a field with four separate and equal sections.
+ * @todo Write the Quarterly class.
+ */
+export class Quarterly {}

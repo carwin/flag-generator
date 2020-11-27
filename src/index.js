@@ -6,34 +6,14 @@
  *
  * @module flag-generator
  */
-import * as utilities from './utilities';
-import * as divisions from './divisions';
+import * as Utilities from './utilities';
+import * as Divisions from './divisions';
 
 // Ideas:
 //   - Take the flag width and height and divide it into 9 parts (rule of 3rds). Process each of the 9 parts individually for color
 //     After than use the 4 intersections to add more complexity.
 //
-//   - Instead of doing Divisions the way I am now, instead create division templates and choose from them randomly:
-//      * Fesses3         - 3 vertical lines
-//      * Fesses2         - 2 vertical lines
-//      * Pales3          - 3 horizontal lines. I guess the American flag is Pales13 and Canton put together.
-//      * Pales2          - 2 horizontal lines
-//      * Canton          - A canton
-//      * centerShape     - a shape in the center of the flag
-//      * Bends           - Diagonal from top-right to bottom-left
-//                          This one would have variations for Sinister and Dexter
-//      * Chevron         - A triangle coming off the left side of the flag to the center or slightly less
-//                          This one would have variations for Sinister/Dexter/Top/Bottom I guess
-//      * Saltire         - An X shape in the center
-//      * Pall            - A Y shape: Sinister/Dexter/Top/Bottom
-//      * NordicCross     - A cross with the vertical bar shifted to the left: option to have the asymmetrical vert bar on the right
-//      * SymmetricCross  - A full width/height centered cross
-//      * GreekCross      - A smaller centered cross, maybe this is the same as center shape? See switzerlan
-//      * Quarterly       - 4 equal squares
-//      * Border          - A border around a flag
-//      * Lozenge         - Diamond with points touching borders
-//      * Fusil           - Same as Lozenge, but only the top points touch the border
-//     Expanding on this idea, we should be able to apply patterns if we want to the divisions themselves, looking to
+//     Expanding on this idea, we should be able to apply patterns if we want to the Divisions themselves, looking to
 //     heraldry designs for inspiration:
 //      * Paly bendy
 //      * Lozengy  - diamonds in a pattern
@@ -60,10 +40,10 @@ export let settings = {
 
 /** Class representing the whole flag. */
 class Flag {
-    constructor(baseColor, canton, divisions) {
-        this.baseColor = baseColor ? utilities.convertHex(baseColor) : utilities.convertHex('#cfcfcf');
+    constructor(baseColor, canton, Divisions) {
+        this.baseColor = baseColor ? Utilities.convertHex(baseColor) : Utilities.convertHex('#cfcfcf');
         this.canton = typeof canton != 'undefined' ? canton : false;
-        this.divisions = typeof divisions != 'undefined' ? divisions : false;
+        this.Divisions = typeof Divisions != 'undefined' ? Divisions : false;
     }
     createFlag() {
         // Create a canvas to draw on:
@@ -91,10 +71,14 @@ class Flag {
 
         // New division test area:
         console.log('Draw fesses!')
-        const fesses = new divisions.Fesses(2, '#3febeb');
+        const fesses = new Divisions.Fesses(2, '#3febeb');
         fesses.drawFesses(ctx, 500);
 
-        const borders = new divisions.Border('#bceaa7', 25);
+
+        const saltire = new Divisions.Saltire(true);
+        saltire.drawSaltire(ctx);
+
+        const borders = new Divisions.Border(25);
         borders.drawBorder(ctx);
 
         // This bit here is the original way I was drawin divisions.
@@ -349,12 +333,12 @@ const Canton = (embeddedFlag, color) => {
 // Flag testing area
 // ----------------------------------------------------------------------------------------------------------------
 // Generate seed used for random generation.
-const generateSeed = (seedString) => {
-    let seed = typeof seedString !== 'undefined' ? seedrandom(seedString, {state: true}) : seedrandom(Math.floor(Math.random() * 1e9).toString(), {state: true});
-    console.log('generating a seed value to base everything on: ', seed());
-
-    settings.seed = seed();
-}
+// const generateSeed = (seedString) => {
+//     let seed = typeof seedString !== 'undefined' ? seedrandom(seedString, {state: true}) : seedrandom(Math.floor(Math.random() * 1e9).toString(), {state: true});
+//     console.log('generating a seed value to base everything on: ', seed());
+//
+//     settings.seed = seed();
+// }
 
 
 const flagGenerator = (seed, subFlag) => {
@@ -365,10 +349,10 @@ const flagGenerator = (seed, subFlag) => {
 
     // If we have no seed, go get one:
     // seed = typeof seed != 'undefined' ? seed : generateSeed();
-    seed = settings.seed !== false ? seed : typeof seed !== 'undefined' ? seed : generateSeed();
+    seed = settings.seed !== false ? seed : typeof seed !== 'undefined' ? seed : Utilities.generateSeed();
 
     // Generate our flag's base color:
-    const seededColor = utilities.randomHex(seed);
+    const seededColor = Utilities.randomHex(seed);
     console.log('Seeded color: ', seededColor);
 
 
@@ -406,4 +390,4 @@ const flagGenerator = (seed, subFlag) => {
 
 
 
-export default {settings, generateSeed, flagGenerator};
+export default {settings, Utilities, flagGenerator};
