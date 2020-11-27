@@ -1,10 +1,18 @@
+/**
+ * @file Houses the class definitions for Divisions.
+ */
 import { randomHex } from './utilities';
 import { settings } from './index';
 
-/** Class representing the Fesses division pattern **/
+/** Class representing the Fesses division pattern. */
 export class Fesses {
     /**
      * Create fesses.
+     *
+     * @example
+     * // Returns a Fesses instance.
+     * const fesses = new Fesses(2, '#3febeb');
+     * @class
      * @param {number} fessCount - The number of fesses to create.
      * @param {string} seedColor - A string representing a hexadecimal color value.
      */
@@ -14,10 +22,14 @@ export class Fesses {
    }
    /**
     * Draw Fesses on a canvas.
-    * @param {Object} ctx            - A canvas Context
-    * @param {Number} containerWidth - The width of the area on which to draw Fesses
-    * @param {Number} gapPercentage  - A whole number representing a percentage of the containerWidth.
-    * @todo  gapPercentage cannot exceed a certain value, but I don't know how to calculate a stop. Keep it below 20. It's probably something like: the gap percentage cannot exceed a certain value based on the number of gaps
+    *
+    * @example
+    * // Draws a Fesses instance on a canvas.
+    * fesses.drawFesses(ctx, 500);
+    * @param {object} ctx - A canvas Context.
+    * @param {number} containerWidth - The width of the area on which to draw Fesses.
+    * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth.
+    * @todo  The gapPercentage cannot exceed a certain value, but I don't know how to calculate a stop. Keep it below 20. It's probably something like: the gap percentage cannot exceed a certain value based on the number of gaps.
     */
    drawFesses(ctx, containerWidth = 500, gapPercentage = 0) {
        console.log(typeof ctx);

@@ -1,3 +1,6 @@
+/**
+ * @file Flag generator base.
+ */
 import * as utilities from './utilities';
 import { Fesses } from './divisions';
 
@@ -40,46 +43,15 @@ import { Fesses } from './divisions';
 //     We can expand the sequence to create more interesting flags of different ratios.
 //
 import seedrandom from 'seedrandom';
-
+/** The current generator settings. */
 export let settings = {
     seed: false,
-}
-
-
-
-
-// Example SVG function.
-export const makeSVG = () => {
-    console.log('Make an SVG.');
-
-    let svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg1.setAttribute("width", "400");
-    svg1.setAttribute("height", "400");
-    svg1.setAttribute("viewBox", "0 0 800 300");
-
-    let cir1 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    cir1.setAttribute("cx", 50);
-    cir1.setAttribute("cy", 50);
-    cir1.setAttribute("r", 50);
-
-    svg1.appendChild(cir1);
-
-    return svg1;
-
 }
 
 // Prototypes / Classes
 // --------------------------------------------------------------------------------------------------------------
 
-// Flag
-//
-// @args
-//   baseColor - string : a hex color value
-//   canton    - Canton : a Canton object
-//   divisions - array  : an array of Division objects
-//
-//const Flag = (baseColor, canton, divisions) => {
-//}
+/** Class representing the whole flag. */
 class Flag {
     constructor(baseColor, canton, divisions) {
         this.baseColor = baseColor ? utilities.convertHex(baseColor) : utilities.convertHex('#cfcfcf');

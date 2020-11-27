@@ -1,15 +1,32 @@
-// Generate a pseudo-random hex color based on a given seed.
-//
-// @args
-//   seed  -  float : a float below 0;
-//
-export function randomHex(seed, modifier) {
+/**
+ * @file Utilities for flag generation.
+ */
+
+/**
+ * Generate a random hex color based on the seed.
+ *
+ * @example
+ * // returns #2b32ad
+ * randomHex(0.8112494706388412);
+ * @param {number} seed - The prng generated seed value under 1.
+ * @param {number} modifier - A number used to perform modifications to the seed.
+ * @returns {string} The pseudo-randomly generated hexadecimal color value.
+ */
+function randomHex(seed, modifier = 15) {
     modifier = typeof modifier !== 'undefined' ? modifier : 15;
     return '#'+((seed * modifier % 1) * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 }
 
-// Take a hex value and turn it into an RGB object.
-export function hexToRgb(hex) {
+/**
+ * Turn a hexadecimal color string into an rgb() object.
+ *
+ * @example
+ * // returns {r: 255, g: 255, b: 255}
+ * hexToRgb('#ffffff');
+ * @param {string} hex - A hexadecimal color string.
+ * @returns {{r: number, b: number, g: number}|null} - An object containing RGB keys.
+ */
+function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
         r: parseInt(result[1], 16),
@@ -18,9 +35,43 @@ export function hexToRgb(hex) {
     } : null;
 }
 
-// Take a hex value and output it as an RGB string.
-export const convertHex = (hex) => {
-// var convertHex = function(hex) {
+/**
+ * Convert a hexadecimal color string to an rgb() string.
+ *
+ * @example
+ * // Returns rgb(255, 255, 255)
+ * convertHex('#ffffff');
+ * @param {string} hex - A hexadecimal color string.
+ * @returns {string} - An RGB color string.
+ */
+const convertHex = (hex) => {
     const rgbObject = hexToRgb(hex);
     return 'rgb(' + rgbObject.r + ', ' + rgbObject.g + ', ' + rgbObject.b + ')';
 }
+
+// /**
+//  *
+//  * @returns {SVGSVGElement}
+//  */
+// const makeSVG = () => {
+//     console.log('Make an SVG.');
+//
+//     let svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+//     svg1.setAttribute("width", "400");
+//     svg1.setAttribute("height", "400");
+//     svg1.setAttribute("viewBox", "0 0 800 300");
+//
+//     let cir1 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+//     cir1.setAttribute("cx", 50);
+//     cir1.setAttribute("cy", 50);
+//     cir1.setAttribute("r", 50);
+//
+//     svg1.appendChild(cir1);
+//
+//     return svg1;
+//
+// }
+//
+export {convertHex, randomHex}
+//
+//
