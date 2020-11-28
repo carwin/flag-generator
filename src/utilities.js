@@ -36,8 +36,7 @@ const generateSeed = (seedString) => {
  * @param {number} modifier - A number used to perform modifications to the seed.
  * @returns {string} The pseudo-randomly generated hexadecimal color value.
  */
-function randomHex(seed, modifier = 15) {
-    modifier = typeof modifier !== 'undefined' ? modifier : 15;
+function randomHex(seed = settings.seed, modifier = 15) {
     return '#'+((seed * modifier % 1) * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 }
 
@@ -96,6 +95,6 @@ const convertHex = (hex) => {
 //
 // }
 //
-export {generateSeed, convertHex, randomHex}
+export {generateSeed, convertHex, randomHex, hexToRgb}
 //
 //

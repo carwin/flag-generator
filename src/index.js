@@ -18,15 +18,7 @@ import * as Divisions from './divisions';
 //      * Paly bendy
 //      * Lozengy  - diamonds in a pattern
 //
-//   - Use some common flag ratios when choosing a flag size. The following are all real flag ratios, and
-//     it turns out that, in order, they're a fibonacci sequence!  1:1, 1:2, 2:3, 3:5, 5:8
-//      * 1:1 (1.0)   - Vatican and Switzerland...
-//      * 1:2 (2.0)   - Canada, Croatia, Cuba, Ireland...
-//      * 2:3 (1.5)   - Netherlands, Romania, Morocco, Turkey, China...
-//      * 3:5 (1.666) - Bulgaria, Bahrain, Luxembourg, Bangladesh...
-//      * 5:8 (1.6)   - Poland, Sweden, Argentina...
-//     We can expand the sequence to create more interesting flags of different ratios.
-//
+
 import seedrandom from 'seedrandom';
 /** The current generator settings. */
 export let settings = {
@@ -37,13 +29,84 @@ export let settings = {
 
 // Prototypes / Classes
 // --------------------------------------------------------------------------------------------------------------
+/** Class representing a differently envisioned Flag. */
+class Flag2 {
+    // When randomizing, we should use this fibonacci sequence of ratios
+    // 1:1, 1:2, 2:3, 3:5, 5:8
+    constructor(aspectRatio = '3:5') {
+       // Aspect ratio is width / height, so height will be width divided by aspect ratio and
+        // width will be height multiplied by aspect ratio.
+       this.aspect = this.processAspectRatio(aspectRatio);
+       this.dimensions = this.processDimensions();
+       this.totalArea = this.dimensions.h * this.dimensions.w;
+       this.divisions = [];
+       this.generateDivision();
+       // this.drawFlag();
+    }
+    processAspectRatio(aspect) {
+        aspect = aspect.toString().split(':');
+        let aspectObj = {};
+        for (let i = 0; i < aspect.length; i++) {
+           switch(i) {
+               case 0:
+                   aspectObj.h = aspect[i];
+                   break;
+               case 1:
+                   aspectObj.w = aspect[i];
+                   break;
+               default:
+                   throw('I don\'t know how to process this aspect ratio.');
+                   break;
+           }
+        }
+        return aspectObj;
+    }
+    processDimensions(multiplier = 100) {
+        return {
+            h: this.aspect.h * multiplier,
+            w: this.aspect.w * multiplier,
+        };
+    }
+    generateCanvas() {
+       const canvas = document.createElement('canvas');
+       canvas.setAttribute('id', 'flagCanvas2');
+       canvas.setAttribute('style', 'border: 1px solid black;');
+       canvas.setAttribute('width', this.dimensions.w);
+       canvas.setAttribute('height', this.dimensions.h);
+       document.body.appendChild(canvas);
+    }
+    generateDivision() {
+        let divisions = [
+            new Divisions.Pales(1, 33, '#efdbdb'),
+            new Divisions.Fesses(1, 33, '#efdbdb'),
+            new Divisions.Saltire(1, true),
+            new Divisions.Border(),
+        ];
+        this.divisions = this.divisions.concat(divisions);
+    }
+    drawFlag() {
+        this.generateCanvas();
+        const flagArea = this.dimensions.h * this.dimensions.w;
+        console.log('flag area:', flagArea);
+        const canvas = document.getElementById('flagCanvas2');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = Utilities.convertHex('#fe8f1b');
+        console.log('Flag2 fill style: ', settings.seed);
+        ctx.fillRect(0, 0, 500, 300);
+
+        for (let i = 0; i < this.divisions.length; i++) {
+            // Drawing pales.
+            this.divisions[i].draw(ctx);
+        }
+    }
+}
 
 /** Class representing the whole flag. */
 class Flag {
-    constructor(baseColor, canton, Divisions) {
+    constructor(baseColor, canton, divisions) {
         this.baseColor = baseColor ? Utilities.convertHex(baseColor) : Utilities.convertHex('#cfcfcf');
         this.canton = typeof canton != 'undefined' ? canton : false;
-        this.Divisions = typeof Divisions != 'undefined' ? Divisions : false;
+        this.divisions = typeof divisions != 'undefined' ? divisions : false;
     }
     createFlag() {
         // Create a canvas to draw on:
@@ -53,7 +116,7 @@ class Flag {
         canvas.setAttribute('width', '500');
         canvas.setAttribute('height', '300');
         document.body.appendChild(canvas);
-        
+
         // Prepare for drawing
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = this.baseColor;
@@ -72,14 +135,20 @@ class Flag {
         // New division test area:
         console.log('Draw fesses!')
         const fesses = new Divisions.Fesses(2, '#3febeb');
+        // const fesses = divisionFactory.createDivisions('Fesses', {fessCount: 2, seedColor: '#3febeb'});
         fesses.drawFesses(ctx, 500);
 
 
-        const saltire = new Divisions.Saltire(true);
-        saltire.drawSaltire(ctx);
+        // const pales = new Divisions.Pales();
+        // pales.drawPales(ctx);
 
-        const borders = new Divisions.Border(25);
-        borders.drawBorder(ctx);
+        // const saltire = new Divisions.Saltire(true);
+        // saltire.drawSaltire(ctx);
+        //
+        // const borders = new Divisions.Border(25);
+        // borders.drawBorder(ctx);
+
+
 
         // This bit here is the original way I was drawin divisions.
         // If we were passed an array of divisions, let's draw them.
@@ -101,9 +170,9 @@ class Flag {
         //     console.log('Drawing a division. Index ', i);
         //     this.divisions[i].drawDivision(ctx);
         // }
-        
+
     }
- 
+
 
 }
 
@@ -380,10 +449,16 @@ const flagGenerator = (seed, subFlag) => {
 
 
 
-    console.log('Generating a flag');
-    console.log('Here are the global settings: ', settings);
-    let newFlag = new Flag(seededColor, false, divisions);
-    newFlag.createFlag();
+    const newFlag2 = new Flag2('3:5');
+
+    console.log('-----')
+    console.log('NEW FLAG:', newFlag2)
+    console.log('-----')
+
+    newFlag2.drawFlag();
+
+    // let newFlag = new Flag(seededColor, false, divisions);
+    // newFlag.createFlag();
 
 }
 
