@@ -31,5 +31,8 @@
     "webpack": "^5.6.0",
     "webpack-cli": "^4.2.0",
     "webpack-merge": "^5.4.0"
+  },
+  "dependencies": {
+    "tinycolor2": "^1.4.2"
   }
 }

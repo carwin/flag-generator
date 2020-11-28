@@ -1,18 +1,40 @@
 /**
  * @file Houses the export class definitions for Divisions.
  */
+import tinycolor from 'tinycolor2';
+import { randomHex, convertHex, hexToRgb } from './utilities';
+import settings from './settings';
+
 /**
  * Divisions module.
  *
  * @module flag-generator/divisions
  */
 
+/**
+ * Common methods and properties of all Divisions.
+ *
+ * @class
+ * @classdesc A collection of methods and properties common to all the Division pattern classes.
+ */
 class Division {
+    /**
+     * Creates a Division.
+     *
+     * @example
+     * // Creates a Division. This would usually not be done.
+     * const genericDivisionObject = new Division(1, '#ffffff', '.2349785241913');
+     * @param {number} count - The number of divisions to draw.
+     * @param {string} color - A hexadecimal color string.
+     * @param {number} seed - A pseudo-random string generated based on a string value.
+     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
+     */
     constructor(count, color, seed = settings.seed) {
-        this.count = count || this.generateCount();
+        this.count = typeof count !== 'undefined' ? count : this.generateCount();
+        console.log('Division count in parent constructor', this.count);
         this.seed = seed;
         this.seedMultiplier = this.generateSeedMultiplier(this.constructor.name);
-        this.color = color || this.generateColor(this.seedMultiplier);
+        this.color = typeof color !== 'undefined' ? color : this.generateColor(this.seedMultiplier);
     }
     generateCount(seed = this.seed, seedMultiplier = this.seedMultiplier) {
         // modify the seed.
@@ -21,28 +43,36 @@ class Division {
         return +(modifiedSeed.toString().substr(-1));
     }
     generateSeedMultiplier(str) {
+        console.log('calling generateSeedMultiplier with', str);
         // Make sure the string is a string.
         let multiplier = '';
         const strArray = str.toString().split('');
         for (let i = 0; i < strArray.length; i++) {
             multiplier = multiplier + strArray[i].charCodeAt(0);
         }
-        multiplier = parseFloat('.' + multiplier);
+        multiplier = parseFloat('.' + multiplier * settings.seed);
         return multiplier;
     }
     generateColor(seed = settings.seed, seedMultiplier = 80857473) {
-        return randomHex(seed, seedMultiplier);
+        let generated = randomHex(seed, seedMultiplier);
+        return {
+            color: tinycolor(generated).toHexString(),
+            complement: tinycolor(generated).complement().toHexString(),
+            splitComplement: tinycolor(generated).splitcomplement().map((sc) => sc.toHexString()),
+            triad: tinycolor(generated).triad().map((tr) => tr.toHexString()),
+            tetrad: tinycolor(generated).tetrad().map((te) => te.toHexString()),
+            analogous: tinycolor(generated).analogous().map((an) => an.toHexString()),
+            monochromatic: tinycolor(generated).monochromatic().map((mo) => mo.toHexString()),
+        }
     }
 }
-
-import { randomHex, convertHex, hexToRgb } from './utilities';
-import { settings } from './index';
 
 /**
  * Fesses pattern.
  *
  * @class
  * @classdesc The Fesses pattern describes one or more vertical divisions of the field.
+ * @augments Division
  */
 export class Fesses extends Division {
     /**
@@ -51,12 +81,20 @@ export class Fesses extends Division {
      * @example
      * // Returns a Fesses instance.
      * const fesses = new Fesses(2, '#3febeb');
-     * @param {number} fessCount - The number of fesses to create.
-     * @param {string} seedColor - A string representing a hexadecimal color value.
+     * @param {number} count - The number of Fesses in this instance.
+     * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth. Used to place gaps during draw time.
+     * @param {string} color - A hexadecimal color string.
+     * @todo Implement a count limiter.
      */
    constructor(count, gapPercentage, color) {
-       super(count, color);
+       if (typeof count !== undefined) {
+           super(count, color);
+       } else {
+           super();
+       }
        this.gapPercentage = gapPercentage || 0;
+       console.log('Fess count from the caller', count);
+       console.log('Fess count in its constructor, after super', super.count);
    }
    /**
     * Draw Fesses on a canvas.
@@ -70,6 +108,7 @@ export class Fesses extends Division {
     * @todo  The gapPercentage cannot exceed a certain value, but I don't know how to calculate a stop. Keep it below 20. It's probably something like: the gap percentage cannot exceed a certain value based on the number of gaps.
     */
    draw(ctx, containerWidth = 500, gapPercentage= this.gapPercentage) {
+       console.log('Fess count during draw', this.count);
        let singleGapWidth,
            singleGapPercentage,
            totalGapPercent,
@@ -98,7 +137,21 @@ export class Fesses extends Division {
        let incrementXpos = singleGapWidth;
        for (let i = 0; i < this.count; i++) {
            // ctx.fillStyle = randomHex(settings.seed, i + 2); // @TODO: Handle color more elegantly, I'd like the colors to be complimentary.
-           ctx.fillStyle = this.color;
+           console.log('Fess count during draw', this.count);
+           if (this.count === 2 && i == 0) {
+               ctx.fillStyle = this.color.complement;
+           } else if (this.count === 2 && i != 0) {
+               ctx.fillStyle = this.color.color;
+           }
+           if (this.count === 3) {
+               ctx.fillStyle = this.color.triad[i];
+           }
+           if (this.count === 4) {
+               ctx.fillStyle = this.color.tetrad[i];
+           }
+           if (this.count > 4 && this.count <= 6) {
+               ctx.fillStyle = this.color.monochromatic[Math.floor(Math.random() * 5)];
+           }
            let ypos = 0; // start at the top always
            let xpos = incrementXpos;
            let w = singleFessWidth;
@@ -114,6 +167,7 @@ export class Fesses extends Division {
  *
  * @class
  * @classdesc The Pales pattern describes one or more horizontal divisions of the field.
+ * @augments Division
  */
 export class Pales extends Division {
     /**
@@ -123,6 +177,8 @@ export class Pales extends Division {
      * // Instantiates a Pales pattern.
      * const pales = new Pales()
      * @param {number} count - The number of Pales in this instance.
+     * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth. Used to place gaps during draw time.
+     * @param {string} color - A hexadecimal color string.
      */
     constructor(count, gapPercentage, color) {
         super(count, color);
@@ -186,9 +242,12 @@ export class Saltire extends Division {
      * const saltire = new Saltire();
      * // Instantiates a Saltire with a border.
      * const saltireWithBorder = new Saltire(true);
+     * @param {number} count - The number of Saltires in this instance. Should typically only be one.
      * @param {boolean} border - A boolean value to decide whether or not to draw a border based on the global seed setting.
      * @param {number} borderWidth - A number value to use when generating border width. This number is used in addition
      * to the randomly generated border width determined by the seed.
+     * @param {string} color - A hexadecimal color string.
+     * @param {string} borderColor - A hexadecimal color string.
      */
     constructor(count, border = false, borderWidth = 0, color, borderColor) {
         super(count, color);
@@ -208,18 +267,6 @@ export class Saltire extends Division {
      */
     generateSaltireWidth(seed = settings.seed) {
        return Math.round(seed * 100);
-    }
-    generateSaltireBorderColor(rgb = this.color) {
-        // This whole thing is kind of stupid, I could just add a param.
-        rgb = hexToRgb(rgb);
-        const newRgb = {r: 0, g: 0, b: 0};
-        console.log('parts', rgb)
-        for (let val in rgb) {
-            const i = Object.keys(rgb).indexOf(val);
-            const newVal = 255 - (i * rgb[val]);
-            newRgb[val] = newVal;
-        }
-        return 'rgb(' + newRgb.r + ', ' + newRgb.g + ', ' + newRgb.b + ')';
     }
     /**
      * Generate border information for the Saltire.
@@ -291,9 +338,44 @@ export class Saltire extends Division {
  *
  * @class
  * @classdesc The Pall pattern describes a Y shape on the field, typically oriented so the top of the Y is on the left of the field.
- * @todo Write the Pall export class.
+ * @augments Division
  */
-export class Pall {}
+export class Pall extends Division {
+    /**
+     * Creates a Pall.
+     *
+     * @example
+     * // Creates a horizontally oriented, white Pall with a black border.
+     * const pall = new Pall('fesswise', '#ffffff', true, 20, '#000000');
+     * @param {string} direction - The orientation of the Pall. One of: fesswise, palewise, fesswiseReversed, palewiseReverse.
+     * @param {string} color - A hexadecimal color string.
+     * @param {boolean} border - Whether or not to draw a border around the Pall.
+     * @param {number} borderWidth - The width of the border.
+     * @param {string} borderColor - A hexadecimal color string.
+     */
+   constructor(direction, color, border = false, borderWidth, borderColor) {
+       console.log('Constructing Pall');
+       super(count, color);
+       this.direction = direction || 'palewise';
+       this.border = border;
+       // @TODO: extrapolate generateSaltireWidth into Division.
+       // this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
+       this.borderWidth = borderWidth;
+       this.borderColor = borderColor || this.generateColor(undefined, .12345);
+   }
+   draw(ctx) {
+       switch (this.direction) {
+           case 'palewise':
+               break;
+           case 'fesswise':
+               break;
+           case 'palewiseReversed':
+               break;
+           case 'fesswiseReversed':
+               break;
+       }
+   }
+}
 
 /** Border pattern.
  *
@@ -302,6 +384,7 @@ export class Pall {}
  * <br>
  * If multiple Divisions are ever combined on a flag, the Border pattern should likely be
  * drawn last to provide a frame effect.
+ * @augments Division
  */
 export class Border extends Division {
     /**
@@ -310,28 +393,14 @@ export class Border extends Division {
      * @example
      * // Instantiates a Border
      * const border = new Border(20);
+     * @param {string} color - A hex color value.
      * @param {number} borderWidth - A number representing the size of the border. This is used for coordinate drawing on a canvas for now.
      * @todo Handle border width more elegantly than taking a flat value from the caller.
      */
     constructor(color, borderWidth) {
         super(color)
         this.color = color || this.generateColor(undefined, .7039);
-        this.borderWidth = borderWidth;
-    }
-    /**
-     * Generate a hex color for the Border.
-     *
-     * @example
-     * // Returns a random hexadecimal color string.
-     * const hexColor = this.generateBorderColor(.9823719751231457);
-     * @param {number} seed - A pseudo-random string generated based on a string value.
-     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()}
-     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
-     * @returns {string} A hexadecimal color value.
-     * @todo I seem to be creating a lot of these color functions. I bet I can extrapolate it for re-use.
-     */
-    generateBorderColor(seed = settings.seed) {
-        return randomHex(seed * .7039);
+        this.borderWidth = borderWidth || 20;
     }
     /**
      * Draws the Border pattern on a canvas.
@@ -419,16 +488,3 @@ export class CenterShape {}
  * @todo Write the Quarterly export class.
  */
 export class Quarterly {}
-
-// @TODO: This is an idea for handling complimentary division patterns.
-export const complimentaryDivisions = () => {
-    return {
-        2: [
-            {divisionGroup: [new Fesses(3, 33), new Pales(3)]},
-            {divisionGroup: [new Saltire(), new Border]}
-        ],
-        3: [
-            {divisionGroup: [new Fesses(), new Saltire(), new Border]}
-        ]
-    }
-}

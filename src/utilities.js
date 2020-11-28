@@ -3,7 +3,7 @@
  */
 
 import seedrandom from "seedrandom";
-import {settings} from "./index";
+import settings from "./settings";
 
 /**
  * Utilities for flag generation.
