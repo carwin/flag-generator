@@ -1,6 +1,6 @@
 module.exports = {
     "plugins": [],
-    "recurseDepth": 0,
+    "recurseDepth": 10,
     "source": {
         "includePattern": ".+\\.js(doc|x)?$",
         "excludePattern": "(^|\\/|\\\\)_"
@@ -11,7 +11,7 @@ module.exports = {
         "dictionaries": ["jsdoc","closure"]
     },
     "templates": {
-        "cleverLinks": false,
+        "cleverLinks": true,
         "monospaceLinks": false
     }
 }

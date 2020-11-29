@@ -8,7 +8,14 @@
  */
 import tinycolor from 'tinycolor2';
 import * as Utilities from './utilities';
-import * as Divisions from './divisions';
+import Bend from './divisions/Bend';
+import Border from './divisions/Border';
+import Canton from './divisions/Canton';
+import Chevron from './divisions/Chevron';
+import Fesses from './divisions/Fesses';
+import Pales from './divisions/Pales';
+import Pall from './divisions/Pall';
+import Saltire from './divisions/Saltire';
 import settings from './settings';
 
 // Ideas:
@@ -38,64 +45,24 @@ class Flag2 {
         // Aspect ratio is width / height, so height will be width divided by aspect ratio and
          // width will be height multiplied by aspect ratio.
         this.color = Utilities.generateColor();
-        this.aspect = this.processAspectRatio(aspectRatio);
-        this.dimensions = this.processDimensions();
+        this.aspect = Utilities.processAspectRatioString(aspectRatio);
+        this.dimensions = Utilities.setDimensionsFromAspectObject(this.aspect);
         this.totalArea = this.dimensions.h * this.dimensions.w;
-        this.divisionCount = this.generateDivisionCount(2, .4689);
-        this.divisions = this.generateDivision(this.divisionCount);
+        this.divisionCount = Utilities.generateCount(2, .4689, settings.seed);
+        this.divisions = this.generateDivisions(this.divisionCount);
+        console.log('this flag division count', this.divisionCount);
+        console.log('colerrrr', Utilities.generateColor());
     }
-    processAspectRatio(aspect) {
-        aspect = aspect.toString().split(':');
-        let aspectObj = {};
-        for (let i = 0; i < aspect.length; i++) {
-           switch(i) {
-               case 0:
-                   aspectObj.h = aspect[i];
-                   break;
-               case 1:
-                   aspectObj.w = aspect[i];
-                   break;
-               default:
-                   throw('I don\'t know how to process this aspect ratio.');
-                   break;
-           }
-        }
-        return aspectObj;
-    }
-    generateDivisionCount(limit, seedMultiplier, seed = settings.seed) {
-        const modifiedSeed = Utilities.modifySeed(seed, seedMultiplier);
-        console.log('modified seed', modifiedSeed);
-        let generated = Utilities.getLastDigit(modifiedSeed);
-        console.log('generated count', generated);
-        if (generated > limit || generated === 0) {
-            generated = 1;
-        }
-        return generated;
-    }
-    processDimensions(multiplier = 100) {
-        return {
-            h: this.aspect.h * multiplier,
-            w: this.aspect.w * multiplier,
-        };
-    }
-    generateCanvas() {
-       const canvas = document.createElement('canvas');
-       canvas.setAttribute('id', 'flagCanvas2');
-       canvas.setAttribute('style', 'border: 1px solid black;');
-       canvas.setAttribute('width', this.dimensions.w);
-       canvas.setAttribute('height', this.dimensions.h);
-       document.body.appendChild(canvas);
-    }
-    generateDivision(count) {
+    generateDivisions(count) {
         let divisions = [];
         const divisionsOptions = [
-            new Divisions.Pales(),
-            new Divisions.Fesses(),
-            new Divisions.Saltire(undefined, true),
-            new Divisions.Border(),
-            new Divisions.Pall(),
-            new Divisions.Chevron(),
-            new Divisions.Bend(),
+            new Pales(),
+            new Fesses(),
+            new Saltire(undefined, true),
+            new Border(),
+            new Pall(),
+            new Chevron(),
+            new Bend(),
         ];
 
         const shuffled = Utilities.pseudoShuffle(divisionsOptions, settings.seed);
@@ -108,19 +75,18 @@ class Flag2 {
         return divisions;
     }
     drawFlag() {
-        this.generateCanvas();
-        const flagArea = this.dimensions.h * this.dimensions.w;
-        console.log('flag area:', flagArea);
-        const canvas = document.getElementById('flagCanvas2');
+        const dimensions = this.dimensions;
+        const divisions = this.divisions;
+        const primaryColor = this.color.color;
+        const seed = settings.seed;
+        Utilities.generateCanvas(document, 'flag_' + seed, dimensions);
+        const canvas = document.getElementById('flag_'+seed);
         const ctx = canvas.getContext('2d');
-        ctx.fillStyle = Utilities.convertHex(tinycolor.random().toHexString());
-        ctx.fillStyle = this.color.color;
-        console.log('Flag2 fill style: ', settings.seed);
-        ctx.fillRect(0, 0, 500, 300);
-
-        for (let i = 0; i < this.divisions.length; i++) {
+        ctx.fillStyle = primaryColor;
+        ctx.fillRect(0, 0, dimensions.w, dimensions.h);
+        for (let i = 0; i < divisions.length; i++) {
             // Drawing pales.
-            this.divisions[i].draw(ctx);
+            divisions[i].draw(ctx);
         }
     }
 }
