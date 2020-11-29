@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utilities.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utilities.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Utilities for flag generation.
+ */
+
+import seedrandom from 'seedrandom';
+import settings from './settings';
+import tinycolor from 'tinycolor2';
+
+/**
+ * Utilities for flag generation.
+ *
+ * @module flag-generator/utilities
+ */
+
+/**
+ * Generate the seed from a seed string.
+ *
+ * @example
+ * // Returns 0.8112494706388412
+ * generateSeed('carwin');
+ * @param {string} seedString - A string on which to run the prng function.
+ */
+const generateSeed = (seedString) => {
+    let seed = typeof seedString !== 'undefined' ? seedrandom(seedString, {state: true}) : seedrandom(Math.floor(Math.random() * 1e9).toString(), {state: true});
+    console.log('generating a seed value to base everything on: ', seed());
+
+    settings.seed = seed();
+}
+
+const modifySeed = (seed, multiplier) => (
+    seed * multiplier
+)
+
+const getLastDigit = (n) => +(n.toString().substr(-1));
+
+
+/**
+ * Generate a random hex color based on the seed.
+ *
+ * @example
+ * // returns #2b32ad
+ * randomHex(0.8112494706388412);
+ * @param {number} seed - The prng generated seed value under 1.
+ * @param {number} modifier - A number used to perform modifications to the seed.
+ * @returns {string} The pseudo-randomly generated hexadecimal color value.
+ */
+function randomHex(seed = settings.seed, modifier = 15) {
+    return '#'+((seed * modifier % 1) * 0xFFFFFF &lt;&lt; 0).toString(16).padStart(6, '0');
+}
+
+/**
+ * Turn a hexadecimal color string into an rgb() object.
+ *
+ * @example
+ * // returns {r: 255, g: 255, b: 255}
+ * hexToRgb('#ffffff');
+ * @param {string} hex - A hexadecimal color string.
+ * @returns {{r: number, b: number, g: number}|null} - An object containing RGB keys.
+ */
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+/**
+ * Convert a hexadecimal color string to an rgb() string.
+ *
+ * @example
+ * // Returns rgb(255, 255, 255)
+ * convertHex('#ffffff');
+ * @param {string} hex - A hexadecimal color string.
+ * @returns {string} - An RGB color string.
+ */
+const convertHex = (hex) => {
+    const rgbObject = hexToRgb(hex);
+    return 'rgb(' + rgbObject.r + ', ' + rgbObject.g + ', ' + rgbObject.b + ')';
+}
+
+const generateColor = (seed = settings.seed, seedMultiplier = 80857473) => {
+    let generated = randomHex(seed, seedMultiplier);
+    const color = {
+        color: tinycolor(generated).toHexString(),
+        complement: tinycolor(generated).complement().toHexString(),
+        splitComplement: tinycolor(generated).splitcomplement().map((sc) => sc.toHexString()),
+        triad: tinycolor(generated).triad().map((tr) => tr.toHexString()),
+        tetrad: tinycolor(generated).tetrad().map((te) => te.toHexString()),
+        analogous: tinycolor(generated).analogous().map((an) => an.toHexString()),
+        monochromatic: tinycolor(generated).monochromatic().map((mo) => mo.toHexString()),
+    }
+    return color;
+}
+
+/**
+ * Shuffles an array predictably using the Fisher Yates shuffle algorithm.
+ *
+ * @example
+ * // Returns [1, 2, 3, 5, 4]
+ * const originalArray = [1, 2, 3, 4, 5]
+ * const shuffledArray = pseudoShuffle(originalArray, 0.7243609520746538);
+ * @param {Array} arr - The array to be shuffled.
+ * @param {number} seed - The pseudorandom string used to predictabbly apply the algorithm.
+ * @returns {Array} The arr parameter, but shuffled.
+ */
+const pseudoShuffle = (arr, seed = settings.seed) => {
+    let m = arr.length;
+    let t, i
+
+    while (m) {
+        i = Math.floor(seed * m--)
+        t = arr[m]
+        arr[m] = arr[i]
+        arr[i] = t
+    }
+    return arr;
+};
+// /**
+//  *
+//  * @returns {SVGSVGElement}
+//  */
+// const makeSVG = () => {
+//     console.log('Make an SVG.');
+//
+//     let svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+//     svg1.setAttribute("width", "400");
+//     svg1.setAttribute("height", "400");
+//     svg1.setAttribute("viewBox", "0 0 800 300");
+//
+//     let cir1 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+//     cir1.setAttribute("cx", 50);
+//     cir1.setAttribute("cy", 50);
+//     cir1.setAttribute("r", 50);
+//
+//     svg1.appendChild(cir1);
+//
+//     return svg1;
+//
+// }
+//
+export {generateSeed, generateColor, convertHex, randomHex, hexToRgb, getLastDigit, modifySeed, pseudoShuffle}
+//
+//</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-flag-generator.html">flag-generator</a></li><li><a href="module-flag-generator_divisions.html">flag-generator/divisions</a></li><li><a href="module-flag-generator_utilities.html">flag-generator/utilities</a></li></ul><h3>Classes</h3><ul><li><a href="module-flag-generator_divisions.Bend.html">Bend</a></li><li><a href="module-flag-generator_divisions.Border.html">Border</a></li><li><a href="module-flag-generator_divisions.Canton.html">Canton</a></li><li><a href="module-flag-generator_divisions.CenterShape.html">CenterShape</a></li><li><a href="module-flag-generator_divisions.Chevron.html">Chevron</a></li><li><a href="module-flag-generator_divisions.Cross.html">Cross</a></li><li><a href="module-flag-generator_divisions.Fesses.html">Fesses</a></li><li><a href="module-flag-generator_divisions.Fusil.html">Fusil</a></li><li><a href="module-flag-generator_divisions.Lozenge.html">Lozenge</a></li><li><a href="module-flag-generator_divisions.Pales.html">Pales</a></li><li><a href="module-flag-generator_divisions.Pall.html">Pall</a></li><li><a href="module-flag-generator_divisions.Quarterly.html">Quarterly</a></li><li><a href="module-flag-generator_divisions.Saltire.html">Saltire</a></li><li><a href="module-flag-generator_divisions-Division.html">Division</a></li><li><a href="module-flag-generator-Flag2.html">Flag2</a></li></ul><h3>Global</h3><ul><li><a href="global.html#settings">settings</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sun Nov 29 2020 04:15:19 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
