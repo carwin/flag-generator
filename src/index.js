@@ -35,14 +35,14 @@ class Flag2 {
     // When randomizing, we should use this fibonacci sequence of ratios
     // 1:1, 1:2, 2:3, 3:5, 5:8
     constructor(aspectRatio = '3:5') {
-       // Aspect ratio is width / height, so height will be width divided by aspect ratio and
-        // width will be height multiplied by aspect ratio.
-       this.aspect = this.processAspectRatio(aspectRatio);
-       this.dimensions = this.processDimensions();
-       this.totalArea = this.dimensions.h * this.dimensions.w;
-       this.divisions = [];
-       this.generateDivision();
-       // this.drawFlag();
+        // Aspect ratio is width / height, so height will be width divided by aspect ratio and
+         // width will be height multiplied by aspect ratio.
+        this.color = Utilities.generateColor();
+        this.aspect = this.processAspectRatio(aspectRatio);
+        this.dimensions = this.processDimensions();
+        this.totalArea = this.dimensions.h * this.dimensions.w;
+        this.divisionCount = this.generateDivisionCount(2, .4689);
+        this.divisions = this.generateDivision(this.divisionCount);
     }
     processAspectRatio(aspect) {
         aspect = aspect.toString().split(':');
@@ -62,6 +62,16 @@ class Flag2 {
         }
         return aspectObj;
     }
+    generateDivisionCount(limit, seedMultiplier, seed = settings.seed) {
+        const modifiedSeed = Utilities.modifySeed(seed, seedMultiplier);
+        console.log('modified seed', modifiedSeed);
+        let generated = Utilities.getLastDigit(modifiedSeed);
+        console.log('generated count', generated);
+        if (generated > limit || generated === 0) {
+            generated = 1;
+        }
+        return generated;
+    }
     processDimensions(multiplier = 100) {
         return {
             h: this.aspect.h * multiplier,
@@ -76,14 +86,26 @@ class Flag2 {
        canvas.setAttribute('height', this.dimensions.h);
        document.body.appendChild(canvas);
     }
-    generateDivision() {
-        let divisions = [
-            // new Divisions.Pales(1, 50),
-            new Divisions.Fesses(3),
-            // new Divisions.Saltire(),
-            // new Divisions.Border(),
+    generateDivision(count) {
+        let divisions = [];
+        const divisionsOptions = [
+            new Divisions.Pales(),
+            new Divisions.Fesses(),
+            new Divisions.Saltire(undefined, true),
+            new Divisions.Border(),
+            new Divisions.Pall(),
+            new Divisions.Chevron(),
+            new Divisions.Bend(),
         ];
-        this.divisions = this.divisions.concat(divisions);
+
+        const shuffled = Utilities.pseudoShuffle(divisionsOptions, settings.seed);
+
+        // Randomly choose a number of divisions from the array:
+        for (let i = 0, len = count; i < count; i++) {
+            divisions.push(shuffled[i]);
+        }
+
+        return divisions;
     }
     drawFlag() {
         this.generateCanvas();
@@ -91,7 +113,8 @@ class Flag2 {
         console.log('flag area:', flagArea);
         const canvas = document.getElementById('flagCanvas2');
         const ctx = canvas.getContext('2d');
-        ctx.fillStyle = Utilities.convertHex('#fe8f1b');
+        ctx.fillStyle = Utilities.convertHex(tinycolor.random().toHexString());
+        ctx.fillStyle = this.color.color;
         console.log('Flag2 fill style: ', settings.seed);
         ctx.fillRect(0, 0, 500, 300);
 
