@@ -1,8 +1,8 @@
 /**
- * @file Houses the export class definitions for Divisions.
+ * @file Houses the class definitions for Divisions.
  */
 import tinycolor from 'tinycolor2';
-import { randomHex, convertHex, hexToRgb } from './utilities';
+import * as Utilities from './utilities';
 import settings from './settings';
 
 /**
@@ -25,22 +25,31 @@ class Division {
      * // Creates a Division. This would usually not be done.
      * const genericDivisionObject = new Division(1, '#ffffff', '.2349785241913');
      * @param {number} count - The number of divisions to draw.
+     * @param {number} limit - A number representing the limit for the number of divisions to draw.
      * @param {string} color - A hexadecimal color string.
      * @param {number} seed - A pseudo-random string generated based on a string value.
      * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
+     * @todo Create a generateGap function for the Division sub-classes that might use it: Fesses, Pales, etc...
+     * @todo Create some border methods: generateBorderWidth(), etc...
+     * @todo Implement some border properties that sub-classes can use.
      */
-    constructor(count, color, seed = settings.seed) {
-        this.count = typeof count !== 'undefined' ? count : this.generateCount();
-        console.log('Division count in parent constructor', this.count);
-        this.seed = seed;
+    constructor(count, limit, color, seed) {
+        this.limit = limit;
+        this.seed = typeof seed !== 'undefined' ? seed : settings.seed;
         this.seedMultiplier = this.generateSeedMultiplier(this.constructor.name);
-        this.color = typeof color !== 'undefined' ? color : this.generateColor(this.seedMultiplier);
+        this.color = typeof color !== 'undefined' ? color : Utilities.generateColor(seed, this.seedMultiplier);
+        this.count = typeof count !== 'undefined' ? count : this.generateCount(limit);
     }
-    generateCount(seed = this.seed, seedMultiplier = this.seedMultiplier) {
+    generateCount(limit, seed = this.seed, seedMultiplier = this.seedMultiplier) {
+        console.log('generate count limit,', limit)
         // modify the seed.
         const modifiedSeed = seed * seedMultiplier;
         // Use the last digit as the number of divisions.
-        return +(modifiedSeed.toString().substr(-1));
+        let generated = +(modifiedSeed.toString().substr(-1));
+        if (generated > limit) {
+           generated = limit;
+        }
+        return generated;
     }
     generateSeedMultiplier(str) {
         console.log('calling generateSeedMultiplier with', str);
@@ -53,18 +62,7 @@ class Division {
         multiplier = parseFloat('.' + multiplier * settings.seed);
         return multiplier;
     }
-    generateColor(seed = settings.seed, seedMultiplier = 80857473) {
-        let generated = randomHex(seed, seedMultiplier);
-        return {
-            color: tinycolor(generated).toHexString(),
-            complement: tinycolor(generated).complement().toHexString(),
-            splitComplement: tinycolor(generated).splitcomplement().map((sc) => sc.toHexString()),
-            triad: tinycolor(generated).triad().map((tr) => tr.toHexString()),
-            tetrad: tinycolor(generated).tetrad().map((te) => te.toHexString()),
-            analogous: tinycolor(generated).analogous().map((an) => an.toHexString()),
-            monochromatic: tinycolor(generated).monochromatic().map((mo) => mo.toHexString()),
-        }
-    }
+    // @TODO: Create a generateGap function for the Divisions that might use it: Fesses, Pales, etc...
 }
 
 /**
@@ -87,14 +85,16 @@ export class Fesses extends Division {
      * @todo Implement a count limiter.
      */
    constructor(count, gapPercentage, color) {
-       if (typeof count !== undefined) {
-           super(count, color);
-       } else {
-           super();
-       }
+       const limit = 5;
+       // const superProps = []
+       //  superProps.push(typeof count !== 'undefined' ? count : undefined;
+       //  superProps.push(limit);
+       //  superProps.push(typeof color !== 'undefined' ? color : undefined;
+       // super(typeof count !== 'undefined' ? count : undefined, limit, typeof color !== 'undefined' ? color : undefined);
+       super(count, limit, color);
        this.gapPercentage = gapPercentage || 0;
-       console.log('Fess count from the caller', count);
-       console.log('Fess count in its constructor, after super', super.count);
+       console.log('SUPER:::::::::::', super.count)
+       console.log('Fess count from the caller', this.color);
    }
    /**
     * Draw Fesses on a canvas.
@@ -107,8 +107,7 @@ export class Fesses extends Division {
     * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth.
     * @todo  The gapPercentage cannot exceed a certain value, but I don't know how to calculate a stop. Keep it below 20. It's probably something like: the gap percentage cannot exceed a certain value based on the number of gaps.
     */
-   draw(ctx, containerWidth = 500, gapPercentage= this.gapPercentage) {
-       console.log('Fess count during draw', this.count);
+   draw(ctx, containerWidth = 500, gapPercentage = this.gapPercentage) {
        let singleGapWidth,
            singleGapPercentage,
            totalGapPercent,
@@ -116,6 +115,10 @@ export class Fesses extends Division {
            singleFessWidthPercentage,
            singleFessWidth,
            remainingContainerWidth;
+
+       if (this.count === 1) {
+           gapPercentage = 33;
+       }
 
 
        // What percentage of the whole WIDTH should each fess take up?
@@ -135,22 +138,25 @@ export class Fesses extends Division {
 
        // Figure out x/y coordinates for each fess
        let incrementXpos = singleGapWidth;
+       console.log('Colors during fess draw:', this.color);
        for (let i = 0; i < this.count; i++) {
            // ctx.fillStyle = randomHex(settings.seed, i + 2); // @TODO: Handle color more elegantly, I'd like the colors to be complimentary.
-           console.log('Fess count during draw', this.count);
-           if (this.count === 2 && i == 0) {
-               ctx.fillStyle = this.color.complement;
-           } else if (this.count === 2 && i != 0) {
-               ctx.fillStyle = this.color.color;
-           }
-           if (this.count === 3) {
-               ctx.fillStyle = this.color.triad[i];
-           }
-           if (this.count === 4) {
-               ctx.fillStyle = this.color.tetrad[i];
-           }
-           if (this.count > 4 && this.count <= 6) {
-               ctx.fillStyle = this.color.monochromatic[Math.floor(Math.random() * 5)];
+           switch (this.count) {
+               case 1:
+                   ctx.fillStyle = this.color.color;
+                   break;
+               case 2:
+                   ctx.fillStyle = i === 0 ? this.color.color : this.color.complement;
+                   break;
+               case 3:
+                   ctx.fillStyle = this.color.triad[i];
+                   break;
+               case 4:
+                   ctx.fillStyle = this.color.tetrad[i]
+                   break;
+               default:
+                   ctx.fillStyle = this.color.monochromatic[i];
+                   break;
            }
            let ypos = 0; // start at the top always
            let xpos = incrementXpos;
@@ -181,7 +187,8 @@ export class Pales extends Division {
      * @param {string} color - A hexadecimal color string.
      */
     constructor(count, gapPercentage, color) {
-        super(count, color);
+        const limit = 5;
+        super(count, limit, color);
         this.gapPercentage = gapPercentage || 0;
         console.log('this', this);
         console.log('PALE COUNT', count);
@@ -196,6 +203,10 @@ export class Pales extends Division {
             singlePaleHeight,
             remainingContainerHeight;
 
+        // If we're only generating one Pale, let's center it.
+        if (this.count === 1) {
+            gapPercentage = 33;
+        }
 
         // What percentage of the whole WIDTH should each pale take up?
         singlePaleHeightPercentage = ((100 / this.count)) / 100;
@@ -217,7 +228,23 @@ export class Pales extends Division {
         for (let i = 0; i < this.count; i++) {
             // ctx.fillStyle = randomHex(settings.seed, i + 2); // @TODO: Handle color more elegantly, I'd like the colors to be complimentary.
             // ctx.fillStyle = this.generateColor(settings.seed, (i + .527)); // @TODO: Handle color more elegantly, I'd like the colors to be complimentary.
-            ctx.fillStyle = this.color;
+            switch (this.count) {
+                case 1:
+                    ctx.fillStyle = this.color.color;
+                    break;
+                case 2:
+                    ctx.fillStyle = i === 0 ? this.color.color : this.color.complement;
+                    break;
+                case 3:
+                    ctx.fillStyle = this.color.triad[i];
+                    break;
+                case 4:
+                    ctx.fillStyle = this.color.tetrad[i]
+                    break;
+                default:
+                    ctx.fillStyle = this.color.monochromatic[i];
+                    break;
+            }
             let ypos = incrementYpos; // start at the top always
             let xpos = 0;
             let w = containerWidth;
@@ -250,10 +277,11 @@ export class Saltire extends Division {
      * @param {string} borderColor - A hexadecimal color string.
      */
     constructor(count, border = false, borderWidth = 0, color, borderColor) {
-        super(count, color);
+        const limit = 1;
+        super(count, limit, color);
         this.border = border;
         this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
-        this.borderColor = borderColor || this.generateColor(undefined, .12345);
+        // this.borderColor = borderColor || this.generateColor(undefined, .12345);
     }
     /**
      * Generates a percentage width for the Saltire lines based on the seed.
@@ -284,7 +312,6 @@ export class Saltire extends Division {
 
         // borderInfo.width = borderWidth + this.generateSaltireWidth((seed * .1234));
         borderInfo.width = this.borderWidth;
-        borderInfo.color = this.borderColor;
 
         return borderInfo;
     }
@@ -311,7 +338,7 @@ export class Saltire extends Division {
             ctx.moveTo(0, settings.flagHeight);
             ctx.lineTo(settings.flagWidth, 0);
 
-            ctx.strokeStyle = this.borderColor;
+            ctx.strokeStyle = this.color.complement;
             ctx.lineWidth = saltireWidth + (border.width * 2);
             ctx.stroke();
         }
@@ -328,7 +355,7 @@ export class Saltire extends Division {
         ctx.lineTo(settings.flagWidth, 0);
 
         // Stroke it.
-        ctx.strokeStyle = this.color;
+        ctx.strokeStyle = this.color.color;
         ctx.lineWidth = saltireWidth;
         ctx.stroke();
     }
@@ -353,27 +380,127 @@ export class Pall extends Division {
      * @param {number} borderWidth - The width of the border.
      * @param {string} borderColor - A hexadecimal color string.
      */
-   constructor(direction, color, border = false, borderWidth, borderColor) {
-       console.log('Constructing Pall');
-       super(count, color);
-       this.direction = direction || 'palewise';
+   constructor(direction, color, width, border = false, borderWidth, borderColor) {
+       const limit = 1;
+       super(1, limit, color);
        this.border = border;
+       this.width = width;
+       this.direction = typeof direction !== 'undefined' ? direction : this.generateDirection();
+       console.log('direction in Pall constructor', this.direction);
+
        // @TODO: extrapolate generateSaltireWidth into Division.
        // this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
-       this.borderWidth = borderWidth;
-       this.borderColor = borderColor || this.generateColor(undefined, .12345);
+       this.borderWidth = borderWidth || 50;
+       this.borderColor = borderColor || Utilities.generateColor(undefined, .12345);
+   }
+   generateDirection(seed = this.seed) {
+       // There are 4 possible directions, let's make a choice.
+       // We have 10 possible digits.
+       // 1-4 : palewise  more common.
+       // 5-6 : fesswise
+       // 7-8 : palewise reversed
+       // 9-0 : fesswise reversed
+       let generated;
+       let seedDigit = +(Math.round(this.seed * this.seedMultiplier).toString().substr(-1));
+       if (seedDigit >=1 && seedDigit <= 4) {
+           generated = 'palewise';
+       } else if (seedDigit === 5 || seedDigit === 6) {
+           generated = 'fesswise';
+       } else if (seedDigit === 7 || seedDigit === 8) {
+           generated = 'palewiseReversed';
+       } else if (seedDigit === 0 || seedDigit === 9) {
+           generated = 'fesswiseReversed';
+       }
+       console.log(seedDigit);
+       console.log('returning direction', generated);
+       return generated;
+
+   }
+   drawInstructions(direction) {
+       let instructions;
+      switch (direction) {
+          case 'palewise':
+               instructions = this.drawInstructionsPalewise();
+               break;
+          case 'palewiseReversed':
+                instructions = this.drawInstructionsPalewise(true);
+                break;
+          case 'fesswise':
+               instructions = this.drawInstructionsFesswise();
+               break;
+          case 'fesswiseReversed':
+               instructions = this.drawInstructionsFesswise(true);
+               break;
+      }
+      return instructions;
+   }
+   drawInstructionsPalewise(reversed) {
+       let instructions;
+       if (!reversed) {
+           instructions = [
+               {moveTo: [0, 0]},
+               {lineTo: [settings.flagWidth / 2, settings.flagHeight / 2]},
+               {lineTo: [0, settings.flagHeight]},
+               {moveTo: [settings.flagWidth / 2, settings.flagHeight / 2]},
+               {lineTo: [settings.flagWidth, settings.flagHeight / 2]},
+           ]
+       } else {
+           instructions = [
+               {moveTo: [settings.flagWidth, 0]}, // start top-right
+               {lineTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // draw to center
+               {lineTo: [settings.flagWidth, settings.flagHeight]}, // draw to bottom right
+               {moveTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // move to center
+               {lineTo: [0, settings.flagHeight / 2]}, // Draw to center left side
+           ]
+       }
+       return instructions;
+   }
+   drawInstructionsFesswise(reversed) {
+       let instructions;
+       if (!reversed) {
+           instructions = [
+               {moveTo: [0, 0]}, // start top left
+               {lineTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // draw to center
+               {lineTo: [settings.flagWidth, 0]}, // draw to top right
+               {moveTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // move to center
+               {lineTo: [settings.flagWidth / 2, settings.flagHeight]}, // draw to center bottom
+           ];
+       } else {
+           instructions = [
+               {moveTo: [0, settings.flagHeight]}, // start bottom left
+               {lineTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // draw to center
+               {lineTo: [settings.flagWidth, settings.flagHeight]}, // draw to bottom right
+               {moveTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // move to center
+               {lineTo: [settings.flagWidth / 2, settings.flagHeight - settings.flagHeight]}, // draw to center top
+           ];
+       }
+       return instructions;
    }
    draw(ctx) {
-       switch (this.direction) {
-           case 'palewise':
-               break;
-           case 'fesswise':
-               break;
-           case 'palewiseReversed':
-               break;
-           case 'fesswiseReversed':
-               break;
+       const drawSteps = this.drawInstructions(this.direction);
+       const pallWidth = this.width || Math.round(this.seed * 100);
+
+       // If there's a border, draw it first with a smaller width.
+       if (this.border) {
+           for (let i = 0, len = drawSteps.length; i < len; i++) {
+               const step = Object.keys(drawSteps[i]);
+               const stepParams = Object.values(drawSteps[i])[0];
+               ctx.[step](...stepParams);
+           }
+           ctx.lineWidth = pallWidth + this.borderWidth;
+           ctx.strokeStyle = this.color.complement;
+           ctx.stroke();
        }
+
+       for (let i = 0, len = drawSteps.length; i < len; i++) {
+           const step = Object.keys(drawSteps[i]);
+           const stepParams = Object.values(drawSteps[i])[0];
+           ctx.[step](...stepParams);
+       }
+
+       ctx.strokeStyle = this.color.color;
+       ctx.lineWidth = pallWidth;
+       ctx.stroke();
    }
 }
 
@@ -395,11 +522,12 @@ export class Border extends Division {
      * const border = new Border(20);
      * @param {string} color - A hex color value.
      * @param {number} borderWidth - A number representing the size of the border. This is used for coordinate drawing on a canvas for now.
+     * @augments Division
      * @todo Handle border width more elegantly than taking a flat value from the caller.
      */
     constructor(color, borderWidth) {
-        super(color)
-        this.color = color || this.generateColor(undefined, .7039);
+        const limit = 1;
+        super(1, limit, color);
         this.borderWidth = borderWidth || 20;
     }
     /**
@@ -412,8 +540,9 @@ export class Border extends Division {
      */
     draw(ctx) {
         // Set the line width
+        console.log('border color during draw', this.color);
         ctx.lineWidth = this.borderWidth;
-        ctx.strokeStyle = this.color;
+        ctx.strokeStyle = this.color.color;
         ctx.strokeRect(0, 0, settings.flagWidth, settings.flagHeight);
     }
 }

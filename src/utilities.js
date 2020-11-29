@@ -2,8 +2,9 @@
  * @file Utilities for flag generation.
  */
 
-import seedrandom from "seedrandom";
-import settings from "./settings";
+import seedrandom from 'seedrandom';
+import settings from './settings';
+import tinycolor from 'tinycolor2';
 
 /**
  * Utilities for flag generation.
@@ -25,6 +26,13 @@ const generateSeed = (seedString) => {
 
     settings.seed = seed();
 }
+
+const modifySeed = (seed, multiplier) => (
+    seed * multiplier
+)
+
+const getLastDigit = (n) => +(n.toString().substr(-1));
+
 
 /**
  * Generate a random hex color based on the seed.
@@ -72,6 +80,43 @@ const convertHex = (hex) => {
     return 'rgb(' + rgbObject.r + ', ' + rgbObject.g + ', ' + rgbObject.b + ')';
 }
 
+const generateColor = (seed = settings.seed, seedMultiplier = 80857473) => {
+    let generated = randomHex(seed, seedMultiplier);
+    const color = {
+        color: tinycolor(generated).toHexString(),
+        complement: tinycolor(generated).complement().toHexString(),
+        splitComplement: tinycolor(generated).splitcomplement().map((sc) => sc.toHexString()),
+        triad: tinycolor(generated).triad().map((tr) => tr.toHexString()),
+        tetrad: tinycolor(generated).tetrad().map((te) => te.toHexString()),
+        analogous: tinycolor(generated).analogous().map((an) => an.toHexString()),
+        monochromatic: tinycolor(generated).monochromatic().map((mo) => mo.toHexString()),
+    }
+    return color;
+}
+
+/**
+ * Shuffles an array predictably using the Fisher Yates shuffle algorithm.
+ *
+ * @example
+ * // Returns [1, 2, 3, 5, 4]
+ * const originalArray = [1, 2, 3, 4, 5]
+ * const shuffledArray = pseudoShuffle(originalArray, 0.7243609520746538);
+ * @param {Array} arr - The array to be shuffled.
+ * @param {number} seed - The pseudorandom string used to predictabbly apply the algorithm.
+ * @returns {Array} The arr parameter, but shuffled.
+ */
+const pseudoShuffle = (arr, seed = settings.seed) => {
+    let m = arr.length;
+    let t, i
+
+    while (m) {
+        i = Math.floor(seed * m--)
+        t = arr[m]
+        arr[m] = arr[i]
+        arr[i] = t
+    }
+    return arr;
+};
 // /**
 //  *
 //  * @returns {SVGSVGElement}
@@ -95,6 +140,6 @@ const convertHex = (hex) => {
 //
 // }
 //
-export {generateSeed, convertHex, randomHex, hexToRgb}
+export {generateSeed, generateColor, convertHex, randomHex, hexToRgb, getLastDigit, modifySeed, pseudoShuffle}
 //
 //
