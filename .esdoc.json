@@ -1,0 +1,24 @@
+{
+  "source": ".",
+  "destination": "./docs",
+  "includes": ["\\.js$"],
+  "excludes": ["node_modules", "docs"],
+  "plugins": [
+    {
+      "name": "esdoc-standard-plugin",
+      "option": {
+        "lint": {"enable": true},
+        "coverage": {"enable": false}
+      }
+    },
+    {
+      "name": "esdoc-node"
+    },
+    {
+      "name": "esdoc-type-inference-plugin", "option": {"enable": true}
+    },
+    {
+      "name": "esdoc-ecmascript-proposal-plugin", "option": {"all": true}
+    }
+  ]
+}

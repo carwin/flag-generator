@@ -191,7 +191,7 @@ export default class Pall extends Division {
             for (let i = 0, len = drawSteps.length; i < len; i++) {
                 const step = Object.keys(drawSteps[i]);
                 const stepParams = Object.values(drawSteps[i])[0];
-                ctx.[step](...stepParams);
+                ctx[step](...stepParams);
             }
             ctx.lineWidth = pallWidth + this.borderWidth;
             ctx.strokeStyle = this.color.complement;
@@ -201,7 +201,7 @@ export default class Pall extends Division {
         for (let i = 0, len = drawSteps.length; i < len; i++) {
             const step = Object.keys(drawSteps[i]);
             const stepParams = Object.values(drawSteps[i])[0];
-            ctx.[step](...stepParams);
+            ctx[step](...stepParams);
         }
         console.log('')
         console.log('THIS', this);

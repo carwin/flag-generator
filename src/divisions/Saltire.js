@@ -3,7 +3,6 @@
  */
 import settings from '../settings';
 import Division from '../division';
-/** @memberof module:flag-generator/divisions */
 
 /** Saltire pattern.
  *
@@ -11,7 +10,7 @@ import Division from '../division';
  * @classdesc The Saltire pattern describes two diagonal lines crossing in the center of the field. An X pattern.
  * @augments Division
  */
-export default class Saltire extends Division {
+class Saltire extends Division {
     /**
      * Creates a Saltire.
      *
@@ -110,3 +109,5 @@ export default class Saltire extends Division {
         ctx.stroke();
     }
 }
+
+export default Saltire;

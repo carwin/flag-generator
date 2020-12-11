@@ -6,6 +6,7 @@ module.exports = {
   plugins: [
       new CleanWebpackPlugin(),
   ],
+  target: 'web',
   output: {
       path: path.resolve(__dirname, './dist'),
       filename: 'flag-gen.js',
@@ -14,19 +15,11 @@ module.exports = {
       umdNamedDefine: true,
       globalObject: 'this',
   },
-  externals: {
-      'lodash': {
-          commonjs: 'lodash',
-          commonjs2: 'lodash',
-          amd: 'lodash',
-          root: '_'
-      }
-  },
   module: {
       rules: [
           {
-              test: /\.(js)$/,
-              exclude: /(node_modules|bower_components)/,
+              test: /\.m?js$/,
+              exclude: [/(node_modules|bower_components|docs)/, /^\.external-ecmascript\.js$/, /src/],
               use: ['babel-loader', 'eslint-loader'],
           }
       ]

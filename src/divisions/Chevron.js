@@ -182,7 +182,7 @@ export default class Chevron extends Division {
             for (let i = 0, len = drawSteps.length; i < len; i++) {
                 const step = Object.keys(drawSteps[i]);
                 const stepParams = Object.values(drawSteps[i])[0];
-                ctx.[step](...stepParams);
+                ctx[step](...stepParams);
             }
             ctx.lineWidth = chevronWidth + this.borderWidth;
             ctx.strokeStyle = this.color.complement;
@@ -192,7 +192,7 @@ export default class Chevron extends Division {
         for (let i = 0, len = drawSteps.length; i < len; i++) {
             const step = Object.keys(drawSteps[i]);
             const stepParams = Object.values(drawSteps[i])[0];
-            ctx.[step](...stepParams);
+            ctx[step](...stepParams);
         }
         console.log('')
         console.log('THIS CONSTRUCTOR', this);

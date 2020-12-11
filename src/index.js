@@ -6,12 +6,12 @@
  *
  * @module flag-generator
  */
-import tinycolor from 'tinycolor2';
 import * as Utilities from './utilities';
 import Bend from './divisions/Bend';
 import Border from './divisions/Border';
 import Canton from './divisions/Canton';
 import Chevron from './divisions/Chevron';
+import Cross from './divisions/Cross';
 import Fesses from './divisions/Fesses';
 import Pales from './divisions/Pales';
 import Pall from './divisions/Pall';
@@ -41,54 +41,58 @@ import settings from './settings';
 class Flag2 {
     // When randomizing, we should use this fibonacci sequence of ratios
     // 1:1, 1:2, 2:3, 3:5, 5:8
-    constructor(aspectRatio = '3:5') {
-        // Aspect ratio is width / height, so height will be width divided by aspect ratio and
-         // width will be height multiplied by aspect ratio.
-        this.color = Utilities.generateColor();
-        this.aspect = Utilities.processAspectRatioString(aspectRatio);
-        this.dimensions = Utilities.setDimensionsFromAspectObject(this.aspect);
-        this.totalArea = this.dimensions.h * this.dimensions.w;
-        this.divisionCount = Utilities.generateCount(2, .4689, settings.seed);
-        this.divisions = this.generateDivisions(this.divisionCount);
-        console.log('this flag division count', this.divisionCount);
-        console.log('colerrrr', Utilities.generateColor());
-    }
-    generateDivisions(count) {
-        let divisions = [];
-        const divisionsOptions = [
-            new Pales(),
-            new Fesses(),
-            new Saltire(undefined, true),
-            new Border(),
-            new Pall(),
-            new Chevron(),
-            new Bend(),
-        ];
+  constructor(id, aspectRatio = '3:5') {
+    // Aspect ratio is width / height, so height will be width divided by aspect ratio and
+    // width will be height multiplied by aspect ratio.
+    this.color = Utilities.generateColor();
+    this.aspect = Utilities.processAspectRatioString(aspectRatio);
+    this.dimensions = Utilities.setDimensionsFromAspectObject(this.aspect);
+    this.totalArea = this.dimensions.h * this.dimensions.w;
+    this.divisionCount = Utilities.generateCount(3, .4689, settings.seed);
+    this.divisions = this.generateDivisions(this.divisionCount);
+    this.parentID = id;
+    console.log('this flag division count', this.divisionCount);
+    console.log('colerrrr', Utilities.generateColor());
+  }
+  generateDivisions(count) {
+    let divisions = [];
+    const divisionsOptions = [
+      new Pales(),
+      new Cross(),
+      new Fesses(),
+      new Saltire(undefined, true),
+      new Border(),
+      new Pall(),
+      new Chevron(),
+      new Bend(),
+    ];
 
-        const shuffled = Utilities.pseudoShuffle(divisionsOptions, settings.seed);
+    const shuffled = Utilities.pseudoShuffle(divisionsOptions, settings.seed);
 
-        // Randomly choose a number of divisions from the array:
-        for (let i = 0, len = count; i < count; i++) {
-            divisions.push(shuffled[i]);
-        }
+    // Randomly choose a number of divisions from the array:
+    for (let i = 0, len = count; i < count; i++) {
+        divisions.push(shuffled[i]);
+    }
 
-        return divisions;
+    return divisions;
+  }
+  drawFlag() {
+    const dimensions = this.dimensions;
+    const divisions = this.divisions;
+    const primaryColor = this.color.color;
+    const seed = settings.seed;
+    const parentID = this.parentID !== 'undefined' ? this.parentID : 'root';
+    const canvasID = typeof this.canvasID !== 'undefined' ? this.canvasID : 'flag_' + seed;
+    Utilities.generateCanvas(document, parentID, canvasID, dimensions);
+    const canvas = document.getElementById(canvasID);
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = primaryColor;
+    ctx.fillRect(0, 0, dimensions.w, dimensions.h);
+    for (let i = 0; i < divisions.length; i++) {
+      // Drawing pales.
+      divisions[i].draw(ctx);
     }
-    drawFlag() {
-        const dimensions = this.dimensions;
-        const divisions = this.divisions;
-        const primaryColor = this.color.color;
-        const seed = settings.seed;
-        Utilities.generateCanvas(document, 'flag_' + seed, dimensions);
-        const canvas = document.getElementById('flag_'+seed);
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = primaryColor;
-        ctx.fillRect(0, 0, dimensions.w, dimensions.h);
-        for (let i = 0; i < divisions.length; i++) {
-            // Drawing pales.
-            divisions[i].draw(ctx);
-        }
-    }
+  }
 }
 
 // Flag testing area
@@ -102,7 +106,7 @@ class Flag2 {
 // }
 
 
-const flagGenerator = (seed, subFlag) => {
+const flagGenerator = (id = 'root', seed, subFlag) => {
     console.log('Running the Flag Generator...');
     console.log('Seed received by flagGenerator(): ', seed);
     // Placeholders:
@@ -115,7 +119,6 @@ const flagGenerator = (seed, subFlag) => {
     // Generate our flag's base color:
     const seededColor = Utilities.randomHex(seed);
     console.log('Seeded color: ', seededColor);
-
 
     // Decide if there should be any divisions:
     //
@@ -141,15 +144,16 @@ const flagGenerator = (seed, subFlag) => {
 
 
 
-    const newFlag2 = new Flag2('3:5');
+  console.log('got an ID from caller: ', id);
+  const newFlag2 = new Flag2(id, '3:5');
 
-    console.log('-----')
-    console.log('NEW FLAG:', newFlag2)
-    console.log('-----')
+    console.log('-----');
+    console.log('NEW FLAG:', newFlag2);
+    console.log('-----');
 
     newFlag2.drawFlag();
 
-}
+};
 
 
 

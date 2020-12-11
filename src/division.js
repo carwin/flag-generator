@@ -1,7 +1,6 @@
 /**
  * @file Houses the class definitions for Divisions.
  */
-import tinycolor from 'tinycolor2';
 import * as Utilities from './utilities';
 import settings from './settings';
 
@@ -29,7 +28,8 @@ class Division {
      * @param {number} limit - A number representing the limit for the number of divisions to draw.
      * @param {string} color - A hexadecimal color string.
      * @param {number} seed - A pseudo-random string generated based on a string value.
-     * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
+     * @abstract
+     * @see {@link generateSeed} for more info about the seed.
      * @todo Create a generateGap function for the Division sub-classes that might use it: Fesses, Pales, etc...
      * @todo Create some border methods: generateBorderWidth(), etc...
      * @todo Implement some border properties that sub-classes can use.

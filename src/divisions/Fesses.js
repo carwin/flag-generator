@@ -3,8 +3,6 @@
  */
 import Division from '../division';
 
-/** @module flag-generator/divisions */
-
 /**
  * Fesses pattern.
  *
@@ -19,13 +17,12 @@ export default class Fesses extends Division {
      * @example
      * // Returns a Fesses instance.
      * const fesses = new Fesses(2, '#3febeb');
-     * @param {number} count - The number of Fesses in this instance.
      * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth. Used to place gaps during draw time.
      * @param {string} color - A hexadecimal color string.
      * @todo Switch up the draw function to use draw instructions in the same way as the Pall division.
      */
     constructor(count, gapPercentage, color) {
-        const limit = 5;
+        const limit = 3;
         super(count, limit, color);
         this.gapPercentage = gapPercentage || 0;
     }
@@ -53,8 +50,6 @@ export default class Fesses extends Division {
         if (this.count === 1) {
             gapPercentage = 33;
         }
-
-
         // What percentage of the whole WIDTH should each fess take up?
         singleFessWidthPercentage = ((100 / this.count)) / 100;
         // Given the current count of Fesses, how many gaps are there? One on each side and N gaps between.

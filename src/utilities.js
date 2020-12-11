@@ -238,13 +238,14 @@ export const setDimensionsFromAspectObject = (aspect, multiplier = 100) => ({h: 
  * @param {string} id - The Id to give the created canvas element.
  * @param {object} dimensions - An object containing height(h) and width (w) keys.
  */
-export const generateCanvas = (document, id, dimensions = {h: 300, w: 500}) => {
-    const canvas = document.createElement('canvas');
-    canvas.setAttribute('id', id);
-    canvas.setAttribute('style', 'border: 1px solid black;');
-    canvas.setAttribute('width', dimensions.w);
-    canvas.setAttribute('height', dimensions.h);
-    document.body.appendChild(canvas);
+export const generateCanvas = (document, parentID, canvasID, dimensions = {h: 300, w: 500}) => {
+  const parent = document.getElementById(parentID);
+  const canvas = document.createElement('canvas');
+  canvas.setAttribute('id', canvasID);
+  canvas.setAttribute('style', 'border: 1px solid black;');
+  canvas.setAttribute('width', dimensions.w);
+  canvas.setAttribute('height', dimensions.h);
+  parent.appendChild(canvas);
 }
 /**
  * Generates a number used for decision making based on the seed and a given multiplier.
