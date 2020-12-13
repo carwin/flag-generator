@@ -26,21 +26,15 @@ export default class Pall extends Division {
      * @param {number} borderWidth - The width of the border.
      * @param {string} borderColor - A hexadecimal color string.
      */
-    constructor(direction, color, width, border, borderWidth, borderColor) {
-        super(1, 1, color);
-        this.border = border;
-        this.width = width;
-        this.direction = typeof direction !== 'undefined' ? direction : this.generateDirection();
-
-        // @TODO: extrapolate generateSaltireWidth into Division.
-        // this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
-        this.borderWidth = borderWidth || 50;
-        this.borderColor = borderColor || Utilities.generateColor(undefined, .12345);
-
-        console.log('')
-        console.log('THIS CONSTRUCTOR', this);
-        console.log('')
-    }
+  constructor(params = {seed, direction, color, width, border, borderWidth, borderColor}) {
+    super({seed: params.seed, count: 1, limit: 1, color: params.color});
+    this.border = params.border;
+    this.width = params.width;
+    this.direction = typeof params.direction !== 'undefined' ? params.direction : this.generateDirection();
+    // this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
+    this.borderWidth = params.borderWidth || 50;
+    this.borderColor = params.borderColor || Utilities.generateColor(undefined, .12345);
+  }
     /**
      * Generate a direction value for the Pall.
      *
@@ -132,7 +126,7 @@ export default class Pall extends Division {
                 {lineTo: [0, settings.flagHeight / 2]}, // Draw to center left side
             ]
         }
-        console.log(instructions);
+
         return instructions;
     }
     /**
@@ -203,11 +197,6 @@ export default class Pall extends Division {
             const stepParams = Object.values(drawSteps[i])[0];
             ctx[step](...stepParams);
         }
-        console.log('')
-        console.log('THIS', this);
-        console.log('')
-
-
         ctx.strokeStyle = this.color.color;
         ctx.lineWidth = pallWidth;
         ctx.stroke();

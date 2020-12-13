@@ -11,21 +11,21 @@ import Division from '../division';
  * @augments Division
  */
 export default class Fesses extends Division {
-    /**
-     * Create fesses.
-     *
-     * @example
-     * // Returns a Fesses instance.
-     * const fesses = new Fesses(2, '#3febeb');
-     * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth. Used to place gaps during draw time.
-     * @param {string} color - A hexadecimal color string.
-     * @todo Switch up the draw function to use draw instructions in the same way as the Pall division.
-     */
-    constructor(count, gapPercentage, color) {
-        const limit = 3;
-        super(count, limit, color);
-        this.gapPercentage = gapPercentage || 0;
-    }
+  /**
+   * Create fesses.
+   *
+   * @example
+   * // Returns a Fesses instance.
+   * const fesses = new Fesses(2, '#3febeb');
+   * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth. Used to place gaps during draw time.
+   * @param {string} color - A hexadecimal color string.
+   * @todo Switch up the draw function to use draw instructions in the same way as the Pall division.
+   */
+  constructor(params = {seed, count, gapPercentage, color}) {
+    const limit = 3;
+    super({seed: params.seed, count: params.count, limit, color: params.color});
+    this.gapPercentage = params.gapPercentage || 0;
+  }
     /**
      * Draw Fesses on a canvas.
      *

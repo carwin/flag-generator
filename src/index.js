@@ -21,8 +21,9 @@ import Saltire from './divisions/Saltire';
 import settings from './settings';
 
 // Ideas:
-//   - Take the flag width and height and divide it into 9 parts (rule of 3rds). Process each of the 9 parts individually for color
-//     After than use the 4 intersections to add more complexity.
+//   - Take the flag width and height and divide it into 9 parts (rule of 3rds).
+//     Process each of the 9 parts individually for color
+//     After that use the 4 intersections to add more complexity.
 //
 //     Expanding on this idea, we should be able to apply patterns if we want to the Divisions themselves, looking to
 //     heraldry designs for inspiration:
@@ -30,53 +31,86 @@ import settings from './settings';
 //      * Lozengy  - diamonds in a pattern
 //
 
-/** The current generator settings. */
-// export let settings = {
-//     seed: false,
-//     flagWidth: 500,
-//     flagHeight: 300,
-// }
-
 // Prototypes / Classes
 // --------------------------------------------------------------------------------------------------------------
 /** Class representing a differently envisioned Flag. */
 class Flag {
 
-    // When randomizing, we should use this fibonacci sequence of ratios
-    // 1:1, 1:2, 2:3, 3:5, 5:8
-  constructor(id, aspectRatio = '5:5') {
-    // Aspect ratio is width / height, so height will be width divided by aspect ratio and
-    // width will be height multiplied by aspect ratio.
-    this.color = Utilities.generateColor();
-    this.aspect = Utilities.processAspectRatioString(aspectRatio);
+  constructor(params = {id, aspectRatio, divisionCount, divisions, seed, color}) {
+    this.seed = params.seed ? params.seed : Utilities.generateSeed();
+    this.color = Utilities.generateColor(params.color, undefined, this.seed);
+    this.aspect = params.aspectRatio ? Utilities.processAspectRatioString(params.aspectRatio) : Utilities.processAspectRatioString(this.generatePseudoRandomRatio());
     this.dimensions = Utilities.setDimensionsFromAspectObject(this.aspect);
     this.totalArea = this.dimensions.h * this.dimensions.w;
-    this.divisionCount = Utilities.generateCount(undefined, .4689, settings.seed);
+    this.divisionCount = params.divisionCount ? params.divisionCount : Utilities.generateCount(undefined, .4689, this.seed);
     this.divisions = this.generateDivisions(this.divisionCount);
-    this.parentID = id;
+    this.parentID = params.id;
     // this.drawFlag() = this.drawFlag();
-    console.log('this flag division count', this.divisionCount);
-    console.log('colerrrr', Utilities.generateColor());
     settings.flagHeight = this.dimensions.h;
     settings.flagWidth = this.dimensions.w;
+    // settings.seed = this.seed;
+
+    // this.generatePseudoRandomRatio(1, 6);
+    console.log('flag constructor params', params);
+    console.log('flag generated color', this.color.color);
+
+
+  }
+
+  /**
+   * Generate a random aspect ratio string of the style '3:5'
+   *
+   * This function takes the limit value and generates a fibonacci sequence of
+   * aspect ratios up to that limit, then shuffles the ratios, and chooses
+   * one based on the seed.
+   * @example
+   * // Returns 3:5
+   * const newFlag = new Flag({id: 'test', seed: 0.3994258342288038});
+   * newFlag.generatePseudoRandomRatio();
+   * @param {number} limit - The maximum number of ratio strings to generate.
+   * @returns {string} An aspect ratio string.
+   */
+  generatePseudoRandomRatio(limit) {
+    const genLimit = Utilities.getLastDigit(this.seed);
+    const numSequence = limit || genLimit > 5 ? 5 : genLimit;
+    const arr = [[1, 1], [1, 2]];
+
+    for (let i = 1; i < numSequence; i++) {
+      const opGroup = arr[i];
+      const prevGroup = arr[i - 1];
+
+      let x = opGroup[0] + prevGroup[0];
+      let y = opGroup[1] + prevGroup[1];
+
+      arr[i + 1] = [x, y];
+    }
+
+    const shuffledArr = Utilities.pseudoShuffle(arr);
+    const choiceDigit = Utilities.getLastDigit(numSequence);
+
+    console.log('arr', shuffledArr);
+    return `${shuffledArr[choiceDigit][0]}:${shuffledArr[choiceDigit][1]}`;
   }
 
   generateDivisions(count) {
+    const basicOptions = {
+      seed: this.seed,
+    }
     let divisions = [];
     const divisionsOptions = [
-      new Pales(),
-      new Fesses(),
-      new Fusil(),
-      new Border(),
-      new Lozenge(),
-      new Cross(),
-      new Saltire(),
-      new Pall(),
-      new Chevron(),
-      new Bend(),
+      new Pales(basicOptions),
+      new Cross(basicOptions),
+      new Fusil(basicOptions),
+      new Border(basicOptions),
+      new Lozenge(basicOptions),
+      new Fesses(basicOptions),
+      new Saltire(basicOptions),
+      new Pall(basicOptions),
+      new Chevron(basicOptions),
+      new Bend(basicOptions),
     ];
 
-    const shuffled = Utilities.pseudoShuffle(divisionsOptions, settings.seed);
+    const shuffled = Utilities.pseudoShuffle(divisionsOptions, this.seed);
 
     // Randomly choose a number of divisions from the array:
     for (let i = 0, len = count; i < count; i++) {
@@ -89,9 +123,9 @@ class Flag {
     const dimensions = this.dimensions;
     const divisions = this.divisions;
     const primaryColor = this.color.color;
-    const seed = settings.seed;
+    const seed = this.seed;
     const parentID = this.parentID !== 'undefined' ? this.parentID : 'root';
-    const canvasID = typeof this.canvasID !== 'undefined' ? this.canvasID : 'flag_' + seed;
+    const canvasID = 'flag_' + (Math.round(seed * 100));
     Utilities.generateCanvas(document, parentID, canvasID, dimensions);
     const canvas = document.getElementById(canvasID);
     const ctx = canvas.getContext('2d');
@@ -101,6 +135,11 @@ class Flag {
       // Drawing pales.
       divisions[i].draw(ctx);
     }
+  }
+
+  destroyFlag(seed) {
+    const canvas = document.getElementById('flag_' + (Math.round(seed * 100)));
+    canvas.remove();
   }
 
 }

@@ -4,10 +4,10 @@ import settings from '../settings';
 
 export default class Fusil extends Division {
 
-  constructor(color) {
+  constructor(params = {seed, color}) {
     const count = 1;
     const limit = 1;
-    super(count, limit, color);
+    super({seed: params.seed, count, limit, color: params.color});
   }
 
   draw(ctx) {

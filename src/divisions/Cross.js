@@ -12,15 +12,15 @@ import settings from '../settings';
  */
 export default class Cross extends Division {
 
-  constructor(crossType, color, width, border, borderWidth, borderColor) {
+  constructor(params = {crossType, color, width, border: false, borderWidth, borderColor}) {
     const count = 1;
     const limit = 1;
-    super(count, limit, color);
-    this.crossType = typeof crossType !== 'undefined' ? crossType : this.generateCrossType(this.seed, this.seedMultiplier);
-    this.crossWidth = width || this.generateCrossWidth(this.seed, this.seedMultiplier);
-    this.border = border || false;
-    this.borderWidth = borderWidth || this.generateBorderWidth(this.seed + this.seedMultiplier); // @todo Generate a border width
-    this.borderColor = Utilities.generateColor(borderColor) || Utilities.generateColor(undefined, this.seed * this.seedMultiplier, this.seedMultiplier);
+    super({seed: params.seed, count, limit, color: params.color});
+    this.crossType = typeof params.crossType !== 'undefined' ? params.crossType : this.generateCrossType(this.seed, this.seedMultiplier);
+    this.crossWidth = params.width || this.generateCrossWidth(this.seed, this.seedMultiplier);
+    this.border = params.border;
+    this.borderWidth = params.borderWidth || this.generateBorderWidth(this.seed + this.seedMultiplier); // @todo Generate a border width
+    this.borderColor = Utilities.generateColor(params.borderColor) || Utilities.generateColor(undefined, this.seed * this.seedMultiplier, this.seedMultiplier);
   }
 
   /**

@@ -26,23 +26,24 @@ export default class Border extends Division {
      * @augments Division
      * @todo Handle border width more elegantly than taking a flat value from the caller.
      */
-    constructor(color, borderWidth) {
-        const limit = 1;
-        super(1, limit, color);
-        this.borderWidth = borderWidth || 20;
-    }
-    /**
-     * Draws the Border pattern on a canvas.
-     *
-     * @example
-     * // Draws the Border pattern.
-     * border.draw(ctx);
-     * @param {object} ctx - An object containing a canvas context.
-     */
-    draw(ctx) {
-        // Set the line width
-        ctx.lineWidth = this.borderWidth;
-        ctx.strokeStyle = this.color.color;
-        ctx.strokeRect(0, 0, settings.flagWidth, settings.flagHeight);
-    }
+  constructor(params = {seed, color, borderWidth}) {
+    const limit = 1;
+    const count = 1;
+    super({seed: params.seed, count, limit, color: params.color});
+    this.borderWidth = params.borderWidth || 20;
+  }
+  /**
+   * Draws the Border pattern on a canvas.
+   *
+   * @example
+   * // Draws the Border pattern.
+   * border.draw(ctx);
+   * @param {object} ctx - An object containing a canvas context.
+   */
+  draw(ctx) {
+    // Set the line width
+    ctx.lineWidth = this.borderWidth;
+    ctx.strokeStyle = this.color.color;
+    ctx.strokeRect(0, 0, settings.flagWidth, settings.flagHeight);
+  }
 }

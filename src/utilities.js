@@ -24,8 +24,8 @@ import tinycolor from 'tinycolor2';
 export const generateSeed = (seedString) => {
   const seed = typeof seedString !== 'undefined' ? seedrandom(seedString, {state: true}) : seedrandom(Math.floor(Math.random() * 1e9).toString(), {state: true});
 
-  settings.seed = seed();
-  return settings.seed;
+  // settings.seed = seed();
+  return seed();
 }
 /**
  * Generates a seed multiplier converting the characters of the provided string to numbers name.
@@ -39,7 +39,7 @@ export const generateSeed = (seedString) => {
  * @todo I've read somewhere that parseFloat is dangerous without radx, I should figure out if that's true.
  * @todo: handle the case where settings.seed may not be set.
  */
-export const generateSeedMultiplier = (str) => {
+export const generateSeedMultiplier = (seed, str) => {
   // Make sure the string is a string.
   str = str.toString();
   // Add each character to an array.
@@ -51,7 +51,7 @@ export const generateSeedMultiplier = (str) => {
       multiplier = multiplier + strArray[i].charCodeAt(0);
   }
   // Turn our multiplier string into an actual number.
-  multiplier = parseFloat('.' + multiplier * settings.seed);
+  multiplier = parseFloat('.' + multiplier * seed);
   return multiplier;
 }
 
@@ -98,7 +98,7 @@ export const getLastDigit = (n) => +(n.toString().substr(-1));
  * @param {number} seedModifier - A number used to perform modifications to the seed.
  * @returns {string} The pseudo-randomly generated hexadecimal color value.
  */
-export const randomHex = (seed = settings.seed, seedModifier) => {
+export const randomHex = (seed, seedModifier) => {
     return '#'+((modifySeed(seed, seedModifier) % 1) * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 };
 
@@ -158,7 +158,7 @@ export const convertHex = (hex) => {
  * @param {number} seed - The seed number on which generation depends.
  * @returns {...ColorObject} A {@link module:flag-generator/utilities~ColorObject}.
  */
-export const generateColor = (hex, seedMultiplier = 80857473, seed = settings.seed) => {
+export const generateColor = (hex, seedMultiplier = 80857473, seed) => {
     let generated = randomHex(seed, seedMultiplier);
     if (/^#/.test(hex)) {
       generated = hex;
@@ -187,7 +187,7 @@ export const generateColor = (hex, seedMultiplier = 80857473, seed = settings.se
  * @param {number} seed - The pseudorandom string used to predictabbly apply the algorithm.
  * @returns {Array} The arr parameter, but shuffled.
  */
-export const pseudoShuffle = (arr, seed = settings.seed) => {
+export const pseudoShuffle = (arr, seed) => {
     let m = arr.length;
     let t, i
 
@@ -284,7 +284,7 @@ export const generateCanvas = (document, parentID, canvasID, dimensions) => {
  * @param {number} seed - The seed number on which generation depends.
  * @returns {number} A single digit number between 0 and 9.
  */
-export const generateCount = (limit, seedMultiplier, seed = settings.seed) => {
+export const generateCount = (limit, seedMultiplier, seed) => {
     const modifiedSeed = modifySeed(seed, seedMultiplier);
     let generated = getLastDigit(modifiedSeed);
     if (generated > limit || generated === 0) {

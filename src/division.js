@@ -35,39 +35,14 @@ class Division {
      * @todo Create some border methods: generateBorderWidth(), etc...
      * @todo Implement some border properties that sub-classes can use.
      */
-    constructor(count, limit, color, seed) {
-      this.limit = limit;
-      this.seed = typeof seed !== 'undefined' ? seed : settings.seed;
-      this.seedMultiplier = Utilities.generateSeedMultiplier(this.constructor.name);
-      this.color = typeof color !== 'undefined' ? Utilities.generateColor(color) : Utilities.generateColor(seed, this.seedMultiplier);
-      // this.count = count || Utilities.generateCount(limit, this.seed, this.seedMultiplier)
-      this.count = typeof count !== 'undefined' ? count : Utilities.generateCount(limit, this.seed, this.seedMultiplier);
-    }
+  constructor(params = {count, limit, color, seed}) {
+    this.limit = params.limit;
+    this.seed = params.seed;
+    this.seedMultiplier = Utilities.generateSeedMultiplier(this.seed, this.constructor.name);
+    this.color = typeof params.color !== 'undefined' ? Utilities.generateColor(params.color) : Utilities.generateColor(undefined, this.seed, this.seedMultiplier);
+    this.count = typeof params.count !== 'undefined' ? params.count : Utilities.generateCount(params.limit, this.seed, this.seedMultiplier);
+  }
 }
-
-
-
-
-
-
-
-/**
- * Lozenge pattern.
- *
- * @class
- * @classdesc The Lozenge pattern describes a diamond on the field with each intersection of lines touching the edge of the field.
- * @todo Write the Lozenge export class.
- */
-class Lozenge {}
-
-/**
- * Fusil pattern.
- *
- * @class
- * @classdesc The Fusil pattern is much like the Lozenge pattern, except that the horizontal intersections to not touch the edge of the field. A skinny diamond.
- * @todo Write the Fusil export class.
- */
-class Fusil {}
 
 /**
  * CenterShape pattern.

@@ -26,21 +26,19 @@ export default class Chevron extends Division {
      * @param {number} borderWidth - The width of the border.
      * @param {string} borderColor - A hexadecimal color string.
      */
-    constructor(direction, color, width, border, borderWidth, borderColor) {
-        const limit = 1;
-        super(1, limit, color);
-        this.border = border;
-        this.width = width;
-        this.direction = typeof direction !== 'undefined' ? direction : this.generateDirection();
+  constructor(params = {direction, color, width, border, borderWidth, borderColor, seed}) {
+    // Only 1 Chevron per instance, ever.
+    const limit = 1;
+    super({seed: params.seed, count: 1, limit, color: params.color});
+    this.border = params.border;
+    this.width = params.width;
+    this.direction = typeof params.direction !== 'undefined' ? params.direction : this.generateDirection();
 
-        // @TODO: extrapolate generateSaltireWidth into Division.
-        // this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
-        this.borderWidth = borderWidth || 50;
-        this.borderColor = borderColor || Utilities.generateColor(undefined, .50000);
-        console.log('')
-        console.log('THIS CONSTRUCTOR', this);
-        console.log('')
-    }
+    // @TODO: extrapolate generateSaltireWidth into Division.
+    // this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
+    this.borderWidth = params.borderWidth || 50;
+    this.borderColor = params.borderColor || Utilities.generateColor(undefined, .50000);
+  }
     /**
      * Generate a direction value for the Chevron.
      *
@@ -194,12 +192,7 @@ export default class Chevron extends Division {
             const stepParams = Object.values(drawSteps[i])[0];
             ctx[step](...stepParams);
         }
-        console.log('')
-        console.log('THIS CONSTRUCTOR', this);
-        console.log('')
 
-        console.log('chevronWidth', chevronWidth)
-        console.log('chevron color', this.color.color)
         ctx.strokeStyle = this.color.color;
         ctx.lineWidth = chevronWidth;
         ctx.stroke();

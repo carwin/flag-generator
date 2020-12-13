@@ -25,11 +25,11 @@ export default class Pales extends Division {
      *       to make 4 consistently look good. It always comes out like a rainbow
      *       or a monochrome step.
      */
-    constructor(count, gapPercentage, color) {
-        const limit = 3;
-        super(count, limit, color);
-        this.gapPercentage = gapPercentage || 0;
-    }
+  constructor(params = {count, gapPercentage, color}) {
+    const limit = 3; // No more than 3 Pales per instance.
+    super({seed: params.seed, count: params.count, limit, color: params.color});
+    this.gapPercentage = params.gapPercentage || 0;
+  }
     draw(ctx, containerWidth = settings.flagWidth, containerHeight = settings.flagHeight, gapPercentage = this.gapPercentage) {
         let singleGapHeight,
             singleGapPercentage,

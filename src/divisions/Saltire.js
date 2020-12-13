@@ -26,13 +26,13 @@ class Saltire extends Division {
      * @param {string} color - A hexadecimal color string.
      * @param {string} borderColor - A hexadecimal color string.
      */
-    constructor(count, border = false, borderWidth = 0, color, borderColor) {
-        const limit = 1;
-        super(count, limit, color);
-        this.border = border;
-        this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
-        // this.borderColor = borderColor || this.generateColor(undefined, .12345);
-    }
+  constructor(params = {seed, count, border: false, borderWidth: 0, color, borderColor}) {
+    const limit = 1;
+    super({seed: params.seed, count: params.count, limit, color: params.color});
+    this.border = params.border;
+    this.borderWidth = params.borderWidth > 0 ? params.borderWidth : this.generateSaltireWidth((this.seed * .1234));
+    // this.borderColor = borderColor || this.generateColor(undefined, .12345);
+  }
     /**
      * Generates a percentage width for the Saltire lines based on the seed.
      *
@@ -43,7 +43,7 @@ class Saltire extends Division {
      * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
      * @returns {number} A whole number used elsewhere as a percentage value.
      */
-    generateSaltireWidth(seed = settings.seed) {
+    generateSaltireWidth(seed = this.seed) {
         return Math.round(seed * 100);
     }
     /**
@@ -56,7 +56,7 @@ class Saltire extends Division {
      * @see {@link module:flag-generator/utilities~generateSeed|generateSeed()} for more info about the seed.
      * @returns {object} An object containing width and color keys.
      */
-    generateSaltireBorder(seed = settings.seed) {
+    generateSaltireBorder(seed = this.seed) {
         // let borderWidth = this.borderWidth;
         let borderInfo = {};
 

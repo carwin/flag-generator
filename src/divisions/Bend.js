@@ -32,24 +32,24 @@ export default class Bend extends Division {
      * @param {string} borderColor - A hexadecimal color string.
      * @todo Enhance the generation of border widths, possibly extrapolate whatever we come up with into parent Division class.
      */
-    constructor(count, direction, party = false, color, width, border, borderWidth, borderColor) {
-        let limit;
-        if (party) {
-            limit = 1;
-        } else {
-            limit = 3;
-        }
-        super(count, limit, color);
-        this.party = party;
-        this.border = border;
-        this.width = width;
-        this.direction = typeof direction !== 'undefined' ? direction : this.generateDirection();
-
-        // @TODO: extrapolate generateSaltireWidth into Division.
-        // this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
-        this.borderWidth = borderWidth || 50;
-        this.borderColor = borderColor || Utilities.generateColor(undefined, .50000);
+  constructor(params = {seed, limit, count: 1, direction, party: false, color, width, border, borderWidth, borderColor}) {
+    let limit;
+    if (params.party) {
+      limit = 1;
+    } else {
+      limit = params.limit ? params.limit : 3;
     }
+
+    super({seed: params.seed, count: params.count, limit, color: params.color});
+
+    this.party = params.party;
+    this.border = params.border;
+    this.width = params.width;
+    this.direction = typeof params.direction !== 'undefined' ? params.direction : this.generateDirection(this.seed);
+    // this.borderWidth = borderWidth > 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
+    this.borderWidth = params.borderWidth || 50;
+    this.borderColor = params.borderColor || Utilities.generateColor(undefined, .50000);
+  }
     /**
      * Generate a direction value for the Bend.
      *
