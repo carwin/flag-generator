@@ -1,6 +1,6 @@
 {
   "name": "@carwin/flag-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": "git://github.com/carwin/flag-generator.git",
   "description": "A flag generator",
   "main": "dist/flag-gen.js",
