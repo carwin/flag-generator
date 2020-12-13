@@ -8,9 +8,9 @@
  * @type {{flagHeight: number, seed: boolean, flagWidth: number}}
  */
 let settings = {
-    seed: false,
-    flagWidth: 500,
-    flagHeight: 300,
+  seed: false,
+  flagWidth: undefined,
+  flagHeight: undefined,
 }
 
 export default settings;

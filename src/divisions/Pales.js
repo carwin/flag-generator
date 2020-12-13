@@ -21,9 +21,12 @@ export default class Pales extends Division {
      * @param {number} count - The number of Pales in this instance.
      * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth. Used to place gaps during draw time.
      * @param {string} color - A hexadecimal color string.
+     * @todo The count limit of 3 is only here because I can't figure out a way
+     *       to make 4 consistently look good. It always comes out like a rainbow
+     *       or a monochrome step.
      */
     constructor(count, gapPercentage, color) {
-        const limit = 4;
+        const limit = 3;
         super(count, limit, color);
         this.gapPercentage = gapPercentage || 0;
     }

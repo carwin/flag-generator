@@ -1,9 +1,10 @@
 {
   "presets": [
-    "@babel/env"
+    "@babel/preset-env"
    ],
    "plugins": [
-     "add-module-exports"
+     "add-module-exports",
+     "babel-plugin-rewire"
    ]
 }
 

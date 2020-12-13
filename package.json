@@ -1,10 +1,14 @@
 {
-  "name": "flag-generator",
+  "name": "@carwin/flag-generator",
   "version": "1.0.0",
+  "repository": "git://github.com/carwin/flag-generator.git",
   "description": "A flag generator",
   "main": "dist/flag-gen.js",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
     "build:dev": "webpack --config webpack.dev.babel.js",
     "build:prod": "webpack --config webpack.prod.babel.js",
     "watch": "webpack --config webpack.dev.babel.js --watch "
@@ -19,8 +23,10 @@
     "@babel/preset-env": "^7.12.7",
     "@babel/register": "^7.12.1",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.1",
     "babel-plugin-add-module-exports": "^1.0.4",
+    "babel-plugin-rewire": "^1.2.0",
     "clean-webpack-plugin": "^3.0.0",
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
@@ -28,7 +34,10 @@
     "eslint": "^7.14.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-jsdoc": "^30.7.8",
+    "jest": "^26.6.3",
+    "jest-canvas-mock": "^2.3.0",
     "lodash": "^4.17.20",
+    "rewire": "^5.0.0",
     "seedrandom": "^3.0.5",
     "sockjs-client": "^1.5.0",
     "webpack": "^5.6.0",
@@ -37,5 +46,10 @@
   },
   "dependencies": {
     "tinycolor2": "^1.4.2"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
   }
 }

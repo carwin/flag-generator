@@ -61,14 +61,16 @@ export default class Bend extends Division {
      * @returns {string} - One of: 'dexter', 'sinister'.
      */
     generateDirection(seed = this.seed) {
-        let generated;
-        const seedDigit = Utilities.getLastDigit(Utilities.modifySeed(this.seed, this.seedMultiplier));
-        if (seedDigit >=0 && seedDigit <= 5) {
-            generated = 'dexter';
-        } else if (seedDigit >=6 && seedDigit <= 9) {
-            generated = 'sinister';
-        }
-        return generated;
+      let generated;
+      const seedDigit = Utilities.getLastDigit(Utilities.modifySeed(seed, this.seedMultiplier));
+      if (seedDigit >=0 && seedDigit <= 5) {
+        generated = 'dexter';
+      } else if (seedDigit >=6 && seedDigit <= 9) {
+        generated = 'sinister';
+      } else {
+        throw new Error('seedDigit was not between 0 and 9');
+      }
+      return generated;
     }
     /**
      * Returns the proper draw function instructions for a given direction.
@@ -81,14 +83,16 @@ export default class Bend extends Division {
      * @returns {Function} The draw instruction function corresponding to the direction.
      */
     drawInstructions(direction) {
-        let instructions;
-        switch (direction) {
-            case 'dexter':
-                instructions = this.drawInstructionsDexter();
-                break;
-            case 'sinister':
-                instructions = this.drawInstructionsSinister();
-                break;
+      let instructions;
+      switch (direction) {
+        case 'dexter':
+          instructions = this.drawInstructionsDexter();
+          break;
+        case 'sinister':
+          instructions = this.drawInstructionsSinister();
+          break;
+        default:
+          throw new Error('Direction passed to Bend\'s drawInstructions method was not one of \'sinister\' or \'dexter\'.');
         }
         return instructions;
     }
@@ -178,20 +182,20 @@ export default class Bend extends Division {
      * @todo Come up with a better description, and maybe a better name for the oddDirection parameter.
      */
     shiftStep(positionShift, direction, oddDirection) {
-        return (p, index) => {
-            // If the direction is the oddDirection, we need to add the positionShift to
-            // the x coordinate (0) and subtract the positionShift from the y coordinate (1).
-            let calculated;
-            if (direction === oddDirection) {
-                calculated = index === 0 ? p + positionShift : p - positionShift;
-            }
-                // If the direction is not the oddDirection, we can simply add the positionShift
-            // to both the x and y coords.
-            else {
-                calculated = p + positionShift;
-            }
-            return calculated;
+      return (p, index) => {
+        // If the direction is the oddDirection, we need to add the positionShift to
+        // the x coordinate (0) and subtract the positionShift from the y coordinate (1).
+        let calculated;
+        if (direction === oddDirection) {
+            calculated = index === 0 ? p + positionShift : p - positionShift;
         }
+            // If the direction is not the oddDirection, we can simply add the positionShift
+        // to both the x and y coords.
+        else {
+            calculated = p + positionShift;
+        }
+        return calculated;
+      }
     }
     /**
      * Draws the Chevron division on a canvas.

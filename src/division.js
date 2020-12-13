@@ -1,6 +1,7 @@
 /**
  * @file Houses the class definitions for Divisions.
  */
+import tinycolor from 'tinycolor2';
 import * as Utilities from './utilities';
 import settings from './settings';
 
@@ -35,11 +36,12 @@ class Division {
      * @todo Implement some border properties that sub-classes can use.
      */
     constructor(count, limit, color, seed) {
-        this.limit = limit;
-        this.seed = typeof seed !== 'undefined' ? seed : settings.seed;
-        this.seedMultiplier = Utilities.generateSeedMultiplier(this.constructor.name);
-        this.color = typeof color !== 'undefined' ? color : Utilities.generateColor(seed, this.seedMultiplier);
-        this.count = count || Utilities.generateCount(limit, this.seed, this.seedMultiplier)
+      this.limit = limit;
+      this.seed = typeof seed !== 'undefined' ? seed : settings.seed;
+      this.seedMultiplier = Utilities.generateSeedMultiplier(this.constructor.name);
+      this.color = typeof color !== 'undefined' ? Utilities.generateColor(color) : Utilities.generateColor(seed, this.seedMultiplier);
+      // this.count = count || Utilities.generateCount(limit, this.seed, this.seedMultiplier)
+      this.count = typeof count !== 'undefined' ? count : Utilities.generateCount(limit, this.seed, this.seedMultiplier);
     }
 }
 
@@ -48,15 +50,6 @@ class Division {
 
 
 
-
-/**
- * Cross pattern.
- *
- * @class
- * @classdesc The Cross pattern describes two intersecting lines across the field. There are many variants that may make good sub-export classes: NordicCross, GreekCross, SymmetricCross, etc...
- * @todo Write the Cross export class.
- */
-class Cross {}
 
 /**
  * Lozenge pattern.
@@ -86,6 +79,7 @@ class Fusil {}
 class CenterShape {}
 
 /**
+ * @TODO: This might make a better /field/ pattern than division pattern. Though technically it is a division?
  * Quarterly pattern.
  *
  * @class

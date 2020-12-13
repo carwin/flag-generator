@@ -18,14 +18,14 @@ import tinycolor from 'tinycolor2';
  * @function
  * @example
  * // Returns 0.8112494706388412
- * generateSeed('carwin');
+ * generateSeed('test');
  * @param {string} seedString - A string on which to run the prng function.
  */
 export const generateSeed = (seedString) => {
-    let seed = typeof seedString !== 'undefined' ? seedrandom(seedString, {state: true}) : seedrandom(Math.floor(Math.random() * 1e9).toString(), {state: true});
-    console.log('generating a seed value to base everything on: ', seed());
+  const seed = typeof seedString !== 'undefined' ? seedrandom(seedString, {state: true}) : seedrandom(Math.floor(Math.random() * 1e9).toString(), {state: true});
 
-    settings.seed = seed();
+  settings.seed = seed();
+  return settings.seed;
 }
 /**
  * Generates a seed multiplier converting the characters of the provided string to numbers name.
@@ -37,21 +37,22 @@ export const generateSeed = (seedString) => {
  * @param {string} str - A string value to turn into charcodes.
  * @returns {number} A multiplier to be used with seed multiplication based decision making.
  * @todo I've read somewhere that parseFloat is dangerous without radx, I should figure out if that's true.
+ * @todo: handle the case where settings.seed may not be set.
  */
 export const generateSeedMultiplier = (str) => {
-    // Make sure the string is a string.
-    str = str.toString();
-    // Add each character to an array.
-    let multiplier = '';
-    const strArray = str.toString().split('');
-    // Loop over the array of characters, turn them into a number, and add them to a string.
-    // I could probably do this more simply with array.map() or reduce() somehow.
-    for (let i = 0; i < strArray.length; i++) {
-        multiplier = multiplier + strArray[i].charCodeAt(0);
-    }
-    // Turn our multiplier string into an actual number.
-    multiplier = parseFloat('.' + multiplier * settings.seed);
-    return multiplier;
+  // Make sure the string is a string.
+  str = str.toString();
+  // Add each character to an array.
+  let multiplier = '';
+  const strArray = str.toString().split('');
+  // Loop over the array of characters, turn them into a number, and add them to a string.
+  // I could probably do this more simply with array.map() or reduce() somehow.
+  for (let i = 0; i < strArray.length; i++) {
+      multiplier = multiplier + strArray[i].charCodeAt(0);
+  }
+  // Turn our multiplier string into an actual number.
+  multiplier = parseFloat('.' + multiplier * settings.seed);
+  return multiplier;
 }
 
 /**
@@ -65,9 +66,13 @@ export const generateSeedMultiplier = (str) => {
  * @param {number} seedMultiplier - The multiplier used to alter the seed to generate values.
  * @returns {number} - The product of seed and seedMultiplier.
  */
-export const modifySeed = (seed, seedMultiplier) => (
-    seed * seedMultiplier
-)
+// export const modifySeed = (seed, seedMultiplier) => seed * seedMultiplier
+export const modifySeed = (seed, seedMultiplier) => {
+  // console.log('seed to mod', seed);
+  // console.log('multi', seedMultiplier);
+  return seed * seedMultiplier
+}
+
 
 /**
  * Gets the last digit from a number.
@@ -107,7 +112,7 @@ export const randomHex = (seed = settings.seed, seedModifier) => {
  * @param {string} hex - A hexadecimal color string.
  * @returns {{r: number, b: number, g: number}} - An object containing RGB keys.
  */
-function hexToRgb(hex) {
+export function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
         r: parseInt(result[1], 16),
@@ -126,7 +131,7 @@ function hexToRgb(hex) {
  * @param {string} hex - A hexadecimal color string.
  * @returns {string} - An RGB color string.
  */
-const convertHex = (hex) => {
+export const convertHex = (hex) => {
     const rgbObject = hexToRgb(hex);
     return 'rgb(' + rgbObject.r + ', ' + rgbObject.g + ', ' + rgbObject.b + ')';
 }
@@ -153,8 +158,11 @@ const convertHex = (hex) => {
  * @param {number} seed - The seed number on which generation depends.
  * @returns {...ColorObject} A {@link module:flag-generator/utilities~ColorObject}.
  */
-export const generateColor = (seedMultiplier = 80857473, seed = settings.seed) => {
+export const generateColor = (hex, seedMultiplier = 80857473, seed = settings.seed) => {
     let generated = randomHex(seed, seedMultiplier);
+    if (/^#/.test(hex)) {
+      generated = hex;
+    }
     const color = {
         color: tinycolor(generated).toHexString(),
         complement: tinycolor(generated).complement().toHexString(),
@@ -207,25 +215,42 @@ export const pseudoShuffle = (arr, seed = settings.seed) => {
  * @todo This function could be shortened significantly with a map callback.
  */
 export const processAspectRatioString = (aspect) => {
-    aspect = aspect.toString().split(':');
-    let aspectObj = {};
-    for (let i = 0; i < aspect.length; i++) {
-        switch(i) {
-            case 0:
-                aspectObj.h = aspect[i];
-                break;
-            case 1:
-                aspectObj.w = aspect[i];
-                break;
-            default:
-                throw('I don\'t know how to process this aspect ratio.');
-                break;
-        }
-    }
-    return aspectObj;
+  aspect = aspect.toString().split(':');
+  let aspectObj = {};
+  for (let i = 0; i < aspect.length; i++) {
+    switch(i) {
+      case 0:
+        aspectObj.h = +(aspect[i]);
+        break;
+      case 1:
+        aspectObj.w = +(aspect[i]);
+        break;
+      default:
+        throw new Error('Could not process given aspect ratio string.');
+      }
+  }
+  return aspectObj;
 }
 
-export const setDimensionsFromAspectObject = (aspect, multiplier = 100) => ({h: aspect.h * multiplier, w: aspect.w * multiplier})
+/**
+ * Turn an aspect object into more realistic dimensions.
+ *
+ * @function
+ * @example
+ * // Returns
+ * // {
+ * //   h: 300,
+ * //   w: 500,
+ * // }
+ * const dimensions = setDimensionsFromAspectObject({h: 3, w: 5});
+ * @param {object} aspect - An aspect object.
+ * @param {number} multiplier - A number to multiply the aspect keys by. Defaults to 100.
+ * @returns {object} An object containing height (h) and width (w) keys representing dimensions.
+ */
+export const setDimensionsFromAspectObject = (aspect, multiplier = 100) => ({
+  h: aspect.h * multiplier,
+  w: aspect.w * multiplier
+});
 
 /**
  * Creates a canvas element and append it to the document body.
@@ -238,7 +263,7 @@ export const setDimensionsFromAspectObject = (aspect, multiplier = 100) => ({h: 
  * @param {string} id - The Id to give the created canvas element.
  * @param {object} dimensions - An object containing height(h) and width (w) keys.
  */
-export const generateCanvas = (document, parentID, canvasID, dimensions = {h: 300, w: 500}) => {
+export const generateCanvas = (document, parentID, canvasID, dimensions) => {
   const parent = document.getElementById(parentID);
   const canvas = document.createElement('canvas');
   canvas.setAttribute('id', canvasID);
@@ -261,13 +286,17 @@ export const generateCanvas = (document, parentID, canvasID, dimensions = {h: 30
  */
 export const generateCount = (limit, seedMultiplier, seed = settings.seed) => {
     const modifiedSeed = modifySeed(seed, seedMultiplier);
-    console.log('Modified seed:', modifiedSeed);
     let generated = getLastDigit(modifiedSeed);
-    console.log('Generated count:', generated);
     if (generated > limit || generated === 0) {
         generated = 1;
     }
     return generated;
+}
+
+export const findGreaterNumber = (a, b) => {
+  let greater;
+  greater = a >= b ? a : b;
+  return greater;
 }
 
 // /**
@@ -281,7 +310,7 @@ export const generateCount = (limit, seedMultiplier, seed = settings.seed) => {
 //     svg1.setAttribute("width", "400");
 //     svg1.setAttribute("height", "400");
 //     svg1.setAttribute("viewBox", "0 0 800 300");
-//
+
 //     let cir1 = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 //     cir1.setAttribute("cx", 50);
 //     cir1.setAttribute("cy", 50);
