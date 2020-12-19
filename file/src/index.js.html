@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/index.js | @carwin/flag-generator</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A flag generator"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@carwin/flag-generator"><meta property="twitter:description" content="A flag generator"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/division.js~Division.html">Division</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertHex">convertHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-findGreaterNumber">findGreaterNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCanvas">generateCanvas</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateColor">generateColor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCount">generateCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeed">generateSeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeedMultiplier">generateSeedMultiplier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLastDigit">getLastDigit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexToRgb">hexToRgb</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-modifySeed">modifySeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processAspectRatioString">processAspectRatioString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-pseudoShuffle">pseudoShuffle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomHex">randomHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setDimensionsFromAspectObject">setDimensionsFromAspectObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-settings">settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorObject">ColorObject</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#divisions">divisions</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Bend.js~Bend.html">Bend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Border.js~Border.html">Border</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Canton.js~Canton.html">Canton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Chevron.js~Chevron.html">Chevron</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Cross.js~Cross.html">Cross</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fesses.js~Fesses.html">Fesses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fusil.js~Fusil.html">Fusil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Lozenge.js~Lozenge.html">Lozenge</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pales.js~Pales.html">Pales</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pall.js~Pall.html">Pall</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Saltire.js~Saltire.html">Saltire</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @file Flag generator base.
+ */
+/**
+ * Flag module.
+ *
+ * @module flag-generator
+ */
+import * as Utilities from &apos;./utilities&apos;;
+import Bend from &apos;./divisions/Bend&apos;;
+import Border from &apos;./divisions/Border&apos;;
+import Canton from &apos;./divisions/Canton&apos;;
+import Chevron from &apos;./divisions/Chevron&apos;;
+import Cross from &apos;./divisions/Cross&apos;;
+import Fesses from &apos;./divisions/Fesses&apos;;
+import Fusil from &apos;./divisions/Fusil&apos;;
+import Lozenge from &apos;./divisions/Lozenge&apos;;
+import Pales from &apos;./divisions/Pales&apos;;
+import Pall from &apos;./divisions/Pall&apos;;
+import Saltire from &apos;./divisions/Saltire&apos;;
+import settings from &apos;./settings&apos;;
+
+// Ideas:
+//   - Take the flag width and height and divide it into 9 parts (rule of 3rds).
+//     Process each of the 9 parts individually for color
+//     After that use the 4 intersections to add more complexity.
+//
+//     Expanding on this idea, we should be able to apply patterns if we want to the Divisions themselves, looking to
+//     heraldry designs for inspiration:
+//      * Paly bendy
+//      * Lozengy  - diamonds in a pattern
+//
+
+// Prototypes / Classes
+// --------------------------------------------------------------------------------------------------------------
+/** Class representing a differently envisioned Flag. */
+class Flag {
+
+  constructor(params = {id, aspectRatio, divisionCount, divisions, seed, color}) {
+    this.seed = params.seed ? params.seed : Utilities.generateSeed();
+    this.color = Utilities.generateColor(params.color, undefined, this.seed);
+    this.aspect = params.aspectRatio ? Utilities.processAspectRatioString(params.aspectRatio) : Utilities.processAspectRatioString(this.generatePseudoRandomRatio());
+    this.dimensions = Utilities.setDimensionsFromAspectObject(this.aspect);
+    this.totalArea = this.dimensions.h * this.dimensions.w;
+    this.divisionCount = params.divisionCount ? params.divisionCount : Utilities.generateCount(undefined, .4689, this.seed);
+    this.divisions = this.generateDivisions(this.divisionCount);
+    this.parentID = params.id;
+    // this.drawFlag() = this.drawFlag();
+    settings.flagHeight = this.dimensions.h;
+    settings.flagWidth = this.dimensions.w;
+    // settings.seed = this.seed;
+
+    // this.generatePseudoRandomRatio(1, 6);
+    console.log(&apos;flag constructor params&apos;, params);
+    console.log(&apos;flag generated color&apos;, this.color.color);
+
+
+  }
+
+  /**
+   * Generate a random aspect ratio string of the style &apos;3:5&apos;
+   *
+   * This function takes the limit value and generates a fibonacci sequence of
+   * aspect ratios up to that limit, then shuffles the ratios, and chooses
+   * one based on the seed.
+   * @example
+   * // Returns 3:5
+   * const newFlag = new Flag({id: &apos;test&apos;, seed: 0.3994258342288038});
+   * newFlag.generatePseudoRandomRatio();
+   * @param {number} limit - The maximum number of ratio strings to generate.
+   * @returns {string} An aspect ratio string.
+   */
+  generatePseudoRandomRatio(limit) {
+    const genLimit = Utilities.getLastDigit(this.seed);
+    const numSequence = limit || genLimit &gt; 5 ? 5 : genLimit;
+    const arr = [[1, 1], [1, 2]];
+
+    for (let i = 1; i &lt; numSequence; i++) {
+      const opGroup = arr[i];
+      const prevGroup = arr[i - 1];
+
+      let x = opGroup[0] + prevGroup[0];
+      let y = opGroup[1] + prevGroup[1];
+
+      arr[i + 1] = [x, y];
+    }
+
+    const shuffledArr = Utilities.pseudoShuffle(arr);
+    const choiceDigit = Utilities.getLastDigit(numSequence);
+
+    console.log(&apos;arr&apos;, shuffledArr);
+    return `${shuffledArr[choiceDigit][0]}:${shuffledArr[choiceDigit][1]}`;
+  }
+
+  generateDivisions(count) {
+    const basicOptions = {
+      seed: this.seed,
+    }
+    let divisions = [];
+    const divisionsOptions = [
+      new Pales(basicOptions),
+      new Cross(basicOptions),
+      new Fusil(basicOptions),
+      new Border(basicOptions),
+      new Lozenge(basicOptions),
+      new Fesses(basicOptions),
+      new Saltire(basicOptions),
+      new Pall(basicOptions),
+      new Chevron(basicOptions),
+      new Bend(basicOptions),
+    ];
+
+    const shuffled = Utilities.pseudoShuffle(divisionsOptions, this.seed);
+
+    // Randomly choose a number of divisions from the array:
+    for (let i = 0, len = count; i &lt; count; i++) {
+      divisions.push(shuffled[i]);
+    }
+    return divisions;
+  }
+
+  drawFlag() {
+    const dimensions = this.dimensions;
+    const divisions = this.divisions;
+    const primaryColor = this.color.color;
+    const seed = this.seed;
+    const parentID = this.parentID !== &apos;undefined&apos; ? this.parentID : &apos;root&apos;;
+    const canvasID = &apos;flag_&apos; + (Math.round(seed * 100));
+    Utilities.generateCanvas(document, parentID, canvasID, dimensions);
+    const canvas = document.getElementById(canvasID);
+    const ctx = canvas.getContext(&apos;2d&apos;);
+    ctx.fillStyle = primaryColor;
+    ctx.fillRect(0, 0, dimensions.w, dimensions.h);
+    for (let i = 0; i &lt; divisions.length; i++) {
+      // Drawing pales.
+      divisions[i].draw(ctx);
+    }
+  }
+
+  destroyFlag(seed) {
+    const canvas = document.getElementById(&apos;flag_&apos; + (Math.round(seed * 100)));
+    canvas.remove();
+  }
+
+}
+
+// Flag testing area
+// ----------------------------------------------------------------------------------------------------------------
+
+const flagGenerator = (params = {id: &apos;root&apos;, seed: undefined, subFlag: undefined}) =&gt; {
+  console.log(&apos;Running the Flag Generator...&apos;);
+  console.log(&apos;Seed received by flagGenerator(): &apos;, params.seed);
+  // Placeholders:
+  let divisions = [];
+  const seed = typeof params.seed !== &apos;undefined&apos; ? params.seed : Utilities.generateSeed();
+
+  // Generate our flag&apos;s base color:
+  const seededColor = Utilities.randomHex(seed);
+  // console.log(&apos;Seeded color: &apos;, seededColor);
+
+  // If we have no seed, go get one:
+  // seed = typeof seed != &apos;undefined&apos; ? seed : generateSeed();
+  // seed = params.seed ? params.seed : typeof params.seed !== &apos;undefined&apos; ? params.seed : Utilities.generateSeed();
+
+
+
+  // Decide if there should be any divisions:
+  // We&apos;ll use the seed to generate a binary value to decide whether or not we want any divisions at all.
+  // const divisionChoice = Math.round(seed);
+  // console.log(&apos;Do we want any division(s)? &apos;, divisionChoice ? &apos;yes&apos; : &apos;no&apos;);
+
+  console.log(&apos;got an ID from caller: &apos;, params.id);
+  const newFlag = new Flag(params.id, &apos;3:5&apos;);
+
+  return newFlag;
+
+};
+
+
+
+
+export default {settings, Utilities, Flag, flagGenerator};
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

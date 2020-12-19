@@ -1,0 +1,159 @@
+{
+  "coverage": "47.93%",
+  "expectCount": 121,
+  "actualCount": 58,
+  "files": {
+    "src/division.js": {
+      "expectCount": 9,
+      "actualCount": 4,
+      "undocumentLines": [
+        39,
+        40,
+        41,
+        42,
+        43
+      ]
+    },
+    "src/divisions/Bend.js": {
+      "expectCount": 14,
+      "actualCount": 8,
+      "undocumentLines": [
+        45,
+        46,
+        47,
+        48,
+        50,
+        51
+      ]
+    },
+    "src/divisions/Border.js": {
+      "expectCount": 4,
+      "actualCount": 3,
+      "undocumentLines": [
+        33
+      ]
+    },
+    "src/divisions/Canton.js": {
+      "expectCount": 5,
+      "actualCount": 1,
+      "undocumentLines": [
+        17,
+        20,
+        22,
+        29
+      ]
+    },
+    "src/divisions/Chevron.js": {
+      "expectCount": 12,
+      "actualCount": 7,
+      "undocumentLines": [
+        33,
+        34,
+        35,
+        39,
+        40
+      ]
+    },
+    "src/divisions/Cross.js": {
+      "expectCount": 14,
+      "actualCount": 2,
+      "undocumentLines": [
+        15,
+        19,
+        20,
+        21,
+        22,
+        24,
+        52,
+        63,
+        67,
+        81,
+        106,
+        134
+      ]
+    },
+    "src/divisions/Fesses.js": {
+      "expectCount": 4,
+      "actualCount": 3,
+      "undocumentLines": [
+        27
+      ]
+    },
+    "src/divisions/Fusil.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        7,
+        13
+      ]
+    },
+    "src/divisions/Lozenge.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        7,
+        13
+      ]
+    },
+    "src/divisions/Pales.js": {
+      "expectCount": 4,
+      "actualCount": 2,
+      "undocumentLines": [
+        31,
+        33
+      ]
+    },
+    "src/divisions/Pall.js": {
+      "expectCount": 12,
+      "actualCount": 7,
+      "undocumentLines": [
+        31,
+        32,
+        33,
+        35,
+        36
+      ]
+    },
+    "src/divisions/Saltire.js": {
+      "expectCount": 7,
+      "actualCount": 5,
+      "undocumentLines": [
+        32,
+        33
+      ]
+    },
+    "src/index.js": {
+      "expectCount": 15,
+      "actualCount": 2,
+      "undocumentLines": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        95,
+        122,
+        140,
+        150
+      ]
+    },
+    "src/settings.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/utilities.js": {
+      "expectCount": 14,
+      "actualCount": 13,
+      "undocumentLines": [
+        296
+      ]
+    }
+  }
+}

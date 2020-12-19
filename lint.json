@@ -1,0 +1,195 @@
+[
+  {
+    "name": "generateSeedMultiplier",
+    "filePath": "src/utilities.js",
+    "lines": [
+      {
+        "lineNumber": 29,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 30,
+        "line": " * Generates a seed multiplier converting the characters of the provided string to numbers name."
+      },
+      {
+        "lineNumber": 31,
+        "line": " *"
+      },
+      {
+        "lineNumber": 32,
+        "line": " * @function"
+      },
+      {
+        "lineNumber": 33,
+        "line": " * @example"
+      },
+      {
+        "lineNumber": 34,
+        "line": " * // Returns 0.5363260631705106"
+      },
+      {
+        "lineNumber": 35,
+        "line": " * generateSeedMultiplier('Border');"
+      },
+      {
+        "lineNumber": 36,
+        "line": " * @param {string} str - A string value to turn into charcodes."
+      },
+      {
+        "lineNumber": 37,
+        "line": " * @returns {number} A multiplier to be used with seed multiplication based decision making."
+      },
+      {
+        "lineNumber": 38,
+        "line": " * @todo I've read somewhere that parseFloat is dangerous without radx, I should figure out if that's true."
+      },
+      {
+        "lineNumber": 39,
+        "line": " * @todo: handle the case where settings.seed may not be set."
+      },
+      {
+        "lineNumber": 40,
+        "line": " */"
+      },
+      {
+        "lineNumber": 41,
+        "line": "export const generateSeedMultiplier = (seed, str) => {"
+      }
+    ],
+    "codeParams": [
+      "seed",
+      "str"
+    ],
+    "docParams": [
+      "str"
+    ]
+  },
+  {
+    "name": "generateColor",
+    "filePath": "src/utilities.js",
+    "lines": [
+      {
+        "lineNumber": 149,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 150,
+        "line": " * Generates a color object from a modified seed using the tinycolor2 library."
+      },
+      {
+        "lineNumber": 151,
+        "line": " *"
+      },
+      {
+        "lineNumber": 152,
+        "line": " * @function"
+      },
+      {
+        "lineNumber": 153,
+        "line": " * @example"
+      },
+      {
+        "lineNumber": 154,
+        "line": " * // Generates a ColorObject with a primary color key of #575109;"
+      },
+      {
+        "lineNumber": 155,
+        "line": " * const colorObject = generateColor(80857473, 0.06556305047688744);"
+      },
+      {
+        "lineNumber": 156,
+        "line": " * @param {number} seedMultiplier - The multiplier used to alter the seed to generate values."
+      },
+      {
+        "lineNumber": 157,
+        "line": " * @param {number} seed - The seed number on which generation depends."
+      },
+      {
+        "lineNumber": 158,
+        "line": " * @returns {...ColorObject} A {@link module:flag-generator/utilities~ColorObject}."
+      },
+      {
+        "lineNumber": 159,
+        "line": " */"
+      },
+      {
+        "lineNumber": 160,
+        "line": "export const generateColor = (hex, seedMultiplier = 80857473, seed) => {"
+      }
+    ],
+    "codeParams": [
+      "hex",
+      "seedMultiplier",
+      "seed"
+    ],
+    "docParams": [
+      "seedMultiplier",
+      "seed"
+    ]
+  },
+  {
+    "name": "generateCanvas",
+    "filePath": "src/utilities.js",
+    "lines": [
+      {
+        "lineNumber": 254,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 255,
+        "line": " * Creates a canvas element and append it to the document body."
+      },
+      {
+        "lineNumber": 256,
+        "line": " *"
+      },
+      {
+        "lineNumber": 257,
+        "line": " * @function"
+      },
+      {
+        "lineNumber": 258,
+        "line": " * @example"
+      },
+      {
+        "lineNumber": 259,
+        "line": " * // Creates and appends the canvas with an id of 'myCanvas'."
+      },
+      {
+        "lineNumber": 260,
+        "line": " * generateCanvas(document, 'myCanvas');"
+      },
+      {
+        "lineNumber": 261,
+        "line": " * @param {object} document - A document object."
+      },
+      {
+        "lineNumber": 262,
+        "line": " * @param {string} id - The Id to give the created canvas element."
+      },
+      {
+        "lineNumber": 263,
+        "line": " * @param {object} dimensions - An object containing height(h) and width (w) keys."
+      },
+      {
+        "lineNumber": 264,
+        "line": " */"
+      },
+      {
+        "lineNumber": 265,
+        "line": "export const generateCanvas = (document, parentID, canvasID, dimensions) => {"
+      }
+    ],
+    "codeParams": [
+      "document",
+      "parentID",
+      "canvasID",
+      "dimensions"
+    ],
+    "docParams": [
+      "document",
+      "id",
+      "dimensions"
+    ]
+  }
+]

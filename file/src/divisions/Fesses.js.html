@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/divisions/Fesses.js | @carwin/flag-generator</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A flag generator"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@carwin/flag-generator"><meta property="twitter:description" content="A flag generator"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/division.js~Division.html">Division</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertHex">convertHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-findGreaterNumber">findGreaterNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCanvas">generateCanvas</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateColor">generateColor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCount">generateCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeed">generateSeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeedMultiplier">generateSeedMultiplier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLastDigit">getLastDigit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexToRgb">hexToRgb</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-modifySeed">modifySeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processAspectRatioString">processAspectRatioString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-pseudoShuffle">pseudoShuffle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomHex">randomHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setDimensionsFromAspectObject">setDimensionsFromAspectObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-settings">settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorObject">ColorObject</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#divisions">divisions</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Bend.js~Bend.html">Bend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Border.js~Border.html">Border</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Canton.js~Canton.html">Canton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Chevron.js~Chevron.html">Chevron</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Cross.js~Cross.html">Cross</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fesses.js~Fesses.html">Fesses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fusil.js~Fusil.html">Fusil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Lozenge.js~Lozenge.html">Lozenge</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pales.js~Pales.html">Pales</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pall.js~Pall.html">Pall</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Saltire.js~Saltire.html">Saltire</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/divisions/Fesses.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @file Houses the class properties and methods for the Fesses division.
+ */
+import Division from &apos;../division&apos;;
+
+/**
+ * Fesses pattern.
+ *
+ * @class
+ * @classdesc The Fesses pattern describes one or more vertical divisions of the field.
+ * @augments Division
+ */
+export default class Fesses extends Division {
+  /**
+   * Create fesses.
+   *
+   * @example
+   * // Returns a Fesses instance.
+   * const fesses = new Fesses(2, &apos;#3febeb&apos;);
+   * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth. Used to place gaps during draw time.
+   * @param {string} color - A hexadecimal color string.
+   * @todo Switch up the draw function to use draw instructions in the same way as the Pall division.
+   */
+  constructor(params = {seed, count, gapPercentage, color}) {
+    const limit = 3;
+    super({seed: params.seed, count: params.count, limit, color: params.color});
+    this.gapPercentage = params.gapPercentage || 0;
+  }
+    /**
+     * Draw Fesses on a canvas.
+     *
+     * @example
+     * // Draws a Fesses instance on a canvas.
+     * fesses.drawFesses(ctx, 500);
+     * @param {object} ctx - A canvas Context.
+     * @param {number} containerWidth - The width of the area on which to draw Fesses.
+     * @param {number} gapPercentage - A whole number representing a percentage of the containerWidth.
+     * @todo  The gapPercentage cannot exceed a certain value, but I don&apos;t know how to calculate a stop. Keep it below 20. It&apos;s probably something like: the gap percentage cannot exceed a certain value based on the number of gaps.
+     */
+    draw(ctx, containerWidth = 500, gapPercentage = this.gapPercentage) {
+        let singleGapWidth,
+            singleGapPercentage,
+            totalGapPercent,
+            numGaps,
+            singleFessWidthPercentage,
+            singleFessWidth,
+            remainingContainerWidth;
+
+        // If we&apos;re only drawing 1 division, center it.
+        if (this.count === 1) {
+            gapPercentage = 33;
+        }
+        // What percentage of the whole WIDTH should each fess take up?
+        singleFessWidthPercentage = ((100 / this.count)) / 100;
+        // Given the current count of Fesses, how many gaps are there? One on each side and N gaps between.
+        numGaps = (this.count * 2) - (this.count - 1); // I don&apos;t remember how I arrived at this, but it seems correct.
+        // Turn our whole number gapPercentage into a decimal for math.
+        singleGapPercentage = gapPercentage / 100; // Divide the whole number value by 100 to get a decimal.
+        // Get the total % of the container width taken up by gaps.
+        totalGapPercent = singleGapPercentage * numGaps; // Multiply the decimal from above by the number of gaps to get a total % value of the whole. Useful for later.
+        // How wide is a single gap?
+        singleGapWidth = (containerWidth * singleGapPercentage);
+        // How much of the flag is left for Fesses after we draw gaps?
+        remainingContainerWidth = containerWidth - (totalGapPercent * containerWidth);
+        // Calculate the width of a single Fess by multiplying the fess width percentage by the remaining flag width.
+        singleFessWidth = (singleFessWidthPercentage * remainingContainerWidth);
+
+        // Figure out x/y coordinates for each fess
+        let incrementXpos = singleGapWidth;
+        for (let i = 0; i &lt; this.count; i++) {
+            // ctx.fillStyle = randomHex(settings.seed, i + 2); // @TODO: Handle color more elegantly, I&apos;d like the colors to be complimentary.
+            switch (this.count) {
+                case 1:
+                    ctx.fillStyle = this.color.color;
+                    break;
+                case 2:
+                    ctx.fillStyle = i === 0 ? this.color.color : this.color.complement;
+                    break;
+                case 3:
+                    ctx.fillStyle = this.color.triad[i];
+                    break;
+                case 4:
+                    ctx.fillStyle = this.color.tetrad[i]
+                    break;
+                default:
+                    ctx.fillStyle = this.color.monochromatic[i];
+                    break;
+            }
+            let ypos = 0; // start at the top always
+            let xpos = incrementXpos;
+            let w = singleFessWidth;
+            let h = 300;
+            incrementXpos = incrementXpos + singleFessWidth + singleGapWidth;
+            ctx.fillRect(xpos, ypos, w, h);
+        }
+
+    }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

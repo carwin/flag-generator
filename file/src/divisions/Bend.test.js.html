@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/divisions/Bend.test.js | @carwin/flag-generator</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A flag generator"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@carwin/flag-generator"><meta property="twitter:description" content="A flag generator"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/division.js~Division.html">Division</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertHex">convertHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-findGreaterNumber">findGreaterNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCanvas">generateCanvas</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateColor">generateColor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCount">generateCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeed">generateSeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeedMultiplier">generateSeedMultiplier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLastDigit">getLastDigit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexToRgb">hexToRgb</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-modifySeed">modifySeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processAspectRatioString">processAspectRatioString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-pseudoShuffle">pseudoShuffle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomHex">randomHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setDimensionsFromAspectObject">setDimensionsFromAspectObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-settings">settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorObject">ColorObject</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#divisions">divisions</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Bend.js~Bend.html">Bend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Border.js~Border.html">Border</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Canton.js~Canton.html">Canton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Chevron.js~Chevron.html">Chevron</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Cross.js~Cross.html">Cross</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fesses.js~Fesses.html">Fesses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fusil.js~Fusil.html">Fusil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Lozenge.js~Lozenge.html">Lozenge</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pales.js~Pales.html">Pales</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pall.js~Pall.html">Pall</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Saltire.js~Saltire.html">Saltire</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/divisions/Bend.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import Bend from &apos;./Bend.js&apos;;
+import * as Utilities from &apos;../utilities&apos;;
+import settings from &apos;../settings&apos;;
+import &apos;jest-canvas-mock&apos;;
+
+let canvas;
+let ctx;
+
+settings.flagHeight = 300;
+settings.flagWidth = 500;
+
+describe(&apos;Bend class&apos;, () =&gt; {
+  // Generate a settings object for the tests.
+  Utilities.generateSeed(&apos;test&apos;);
+  const expectedDirections = [&apos;sinister&apos;, &apos;dexter&apos;];
+
+  it(&apos;should be instantiated given all possible options&apos;, () =&gt; {
+    const newBend = new Bend(5, &apos;dexter&apos;, true, &apos;#ffffff&apos;, 20, true, 10, &apos;#000000&apos;);
+    expect(newBend.limit).toBe(1);
+    expect(newBend.seed).toBe(0.8722025543160253);
+    expect(newBend.seedMultiplier).toBe(0.57653557072);
+    expect(newBend.color.color).toBe(&apos;#ffffff&apos;);
+    expect(newBend.count).toEqual(5);
+    expect(newBend.party).toBe(true);
+    expect(newBend.border).toBe(true);
+    expect(newBend.width).toBe(20);
+    expect(newBend.direction).toBe(&apos;dexter&apos;);
+    expect(newBend.borderWidth).toBe(10);
+    expect(newBend.borderColor).toBe(&apos;#000000&apos;);
+  });
+
+  it(&apos;should not have a party if it is not given one during instantiation.&apos;, () =&gt; {
+    const newBend = new Bend(5, &apos;dexter&apos;, undefined, &apos;#ffffff&apos;, 20, true, 10, &apos;#000000&apos;);
+    expect(newBend.party).toBe(false);
+  });
+
+  it(&apos;should have a borderWidth if it is not given a hex color string during instantiation.&apos;, () =&gt; {
+    const newBend = new Bend(5, &apos;dexter&apos;, undefined, &apos;#ffffff&apos;, 20, true, undefined, &apos;#000000&apos;);
+    expect(typeof newBend.borderWidth).toBe(&apos;number&apos;);
+  });
+
+  it(&apos;should have a borderColor instance variable if not provided one during instantiation&apos;, () =&gt; {
+    const newBend = new Bend(5, &apos;dexter&apos;, undefined, &apos;#ffffff&apos;, 20, true);
+    expect(typeof newBend.borderColor).toBe(&apos;object&apos;);
+    expect(newBend.borderColor.color).toMatch(/^#/);
+  });
+
+  it(&apos;should be able to generate a direction if none is passed during instantiation&apos;, () =&gt; {
+    const newBend = new Bend(5);
+    expect(
+      newBend.direction === expectedDirections[0] ||
+      newBend.direction === expectedDirections[1]
+    ).toEqual(true);
+  });
+
+  describe(&apos;should have a generateDirection() method&apos;, () =&gt; {
+    const newBend = new Bend(1, &apos;dexter&apos;, undefined, &apos;#ffffff&apos;, 20, true);
+    it(&apos;which should provide a direction, even if no seed value is given to it directly as a parameter&apos;, () =&gt; {
+      expect(typeof newBend.generateDirection()).toBe(&apos;string&apos;);
+      expect(newBend.generateDirection()).toBe(&apos;dexter&apos;);
+    });
+    it(&apos;which should provide a direction string of dexter if passed a seed that generates a number from 0 - 5 when multiplied by the seedMultiplier&apos;, () =&gt; {
+      expect(newBend.generateDirection(.20983823471132958987123974)).toBe(&apos;dexter&apos;);
+    });
+    it(&apos;which should provide a direction string of sinister if passed a seed that generates a number from 6 - 9 when multiplied by the seedMultiplier&apos;, () =&gt; {
+      expect(newBend.generateDirection(.42379)).toBe(&apos;sinister&apos;);
+    });
+
+    it(&apos;which should throw an error if a digit outside of 0 - 9 is somehow generated.&apos;, () =&gt; {
+      const newBend = new Bend(1, &apos;dexter&apos;, undefined, &apos;#ffffff&apos;, 20, true);
+      expect(() =&gt; {
+        newBend.generateDirection(&apos;thisisnotaseed!&apos;);
+      }).toThrow();
+    });
+
+  });
+
+  describe(&apos;should have a drawInstructions() method&apos;, () =&gt; {
+    const newBend = new Bend(5, &apos;dexter&apos;, undefined, &apos;#ffffff&apos;, 20, true);
+    it(&apos;which should return the correct instructions object based on the given string&apos;, () =&gt; {
+      expect(newBend.drawInstructions(&apos;dexter&apos;)).toEqual([{ moveTo: [0, 0] }, { lineTo: [500, 300]}]);
+      expect(newBend.drawInstructions(&apos;sinister&apos;)).toEqual([{ moveTo: [500, 0] }, { lineTo: [0, 300]}]);
+    });
+    it(&apos;which should throw an error if passed a string other than \&apos;dexter\&apos; or \&apos;sinister\&apos;.&apos;, () =&gt; {
+      expect(() =&gt; {
+        newBend.drawInstructions(&apos;left&apos;);
+      }).toThrow();
+    });
+  });
+
+  describe(&apos;should have a drawInstructionsDexter() method&apos;, () =&gt; {
+    const newBend = new Bend(5, &apos;dexter&apos;, undefined, &apos;#ffffff&apos;, 20, true);
+    it(&apos;which should return an array of objects containing x,y coordinate pairs&apos;, () =&gt; {
+      expect(newBend.drawInstructionsDexter()).toHaveLength(2);
+      expect(newBend.drawInstructionsDexter()).toEqual([
+        { moveTo: [0, 0] },
+        { lineTo: [500, 300]}
+      ]);
+    });
+    it(&apos;which should return an array of objects containing four pairs of x,y coordinates if the bend is a party (half the flag, diagonally)&apos;, () =&gt; {
+      const testPartyDivision = new Bend(5, &apos;dexter&apos;, undefined, &apos;#ffffff&apos;, 20, true);
+      expect(testPartyDivision.drawInstructionsDexter(true)).toHaveLength(4);
+      expect(testPartyDivision.drawInstructionsDexter(true)).toEqual([
+        {moveTo: [0, 0]},
+        {lineTo: [500, 300]},
+        {lineTo: [0, 300]},
+        {lineTo: [0, 0]}
+      ]);
+    });
+  });
+
+
+  describe(&apos;should have a drawInstructionsSinister() method&apos;, () =&gt; {
+    const newBend = new Bend(5, &apos;sinister&apos;, undefined, &apos;#ffffff&apos;, 20, true);
+    it(&apos;which should return an array of objects containing x,y coordinate pairs&apos;, () =&gt; {
+      expect(newBend.drawInstructionsSinister()).toHaveLength(2);
+      expect(newBend.drawInstructionsSinister()).toEqual([
+        { moveTo: [500, 0] },
+        { lineTo: [0, 300]}
+      ]);
+    });
+    it(&apos;which should return an array of objects containing four pairs of x,y coordinates if the bend is a party (half the flag, diagonally)&apos;, () =&gt; {
+      const testPartyDivision = new Bend(5, &apos;sinister&apos;, undefined, &apos;#ffffff&apos;, 20, true);
+      expect(testPartyDivision.drawInstructionsSinister(true)).toHaveLength(4);
+      expect(testPartyDivision.drawInstructionsSinister(true)).toEqual([
+        {moveTo: [500, 0]},
+        {lineTo: [0, 300]},
+        {lineTo: [500, 300]},
+        {lineTo: [500, 0]}
+      ]);
+    });
+  });
+
+  // @todo: This sort of sucks, I&apos;m not sure if I&apos;m even testing this function in a way that&apos;s worthwhile.
+  describe(&apos;should have a shiftStep() method&apos;, () =&gt; {
+    const twoBends = new Bend(2, &apos;dexter&apos;);
+    const drawSteps = twoBends.drawInstructionsSinister(true);
+    const ctxMock = { lineTo(step) {return step}, moveTo(step) { return step } };
+    it(&apos;which should modify the drawn instructions to shift the position of the Bend&apos;, () =&gt; {
+      for (let i = 0; i &lt; drawSteps.length; i++) {
+        const step = Object.keys(drawSteps[i]);
+        const stepParams = Object.values(drawSteps[i])[0];
+        const stepRun = (&apos;logit&apos;, ctxMock[step](...stepParams.map(twoBends.shiftStep(1, twoBends.direction, &apos;sinister&apos;))));
+        const stepRun2 = (&apos;logit&apos;, ctxMock[step](...stepParams.map(twoBends.shiftStep(1, twoBends.direction, &apos;dexter&apos;))));
+        switch (i) {
+        case 0 || 2 || 3:
+          expect(stepRun).toBe(501);
+          expect(stepRun2).toBe(501);
+          break;
+        case 1:
+          expect(stepRun).toBe(1);
+          expect(stepRun2).toBe(1);
+          break;
+        }
+      }
+    });
+  });
+
+  describe(&apos;should have a draw() method&apos;, () =&gt; {
+    const singleBendDexter = new Bend(1, &apos;dexter&apos;, false, &apos;#ffffff&apos;, 20, true, 15, &apos;#000000&apos;);
+    const twoBendDexter = new Bend(2, &apos;dexter&apos;);
+    const threeBendSinister = new Bend(3, &apos;sinister&apos;);
+    const partyBend = new Bend(2, &apos;sinister&apos;, true);
+    // Mock the canvas.
+    canvas = document.createElement(&apos;canvas&apos;);
+    canvas.width = 500;
+    canvas.height = 300;
+    ctx = canvas.getContext(&apos;2d&apos;);
+
+    it(&apos;which should not throw an error when drawing on a canvas&apos;, () =&gt; {
+      expect(() =&gt; {
+        threeBendSinister.draw(ctx)
+      }).not.toThrow();
+    });
+
+    it(&apos;which should draw 3 Bends on a canvas when called with a count of 3&apos;, () =&gt; {
+      // Make sure the mocked canvas paths match the Bend&apos;s drawInstructions.
+      ctx.__clearDrawCalls();
+      threeBendSinister.draw(ctx);
+      const drawStepsSinister = threeBendSinister.drawInstructions(&apos;sinister&apos;);
+      const path = ctx.__getPath();
+      for (let i = 0; i &lt; drawStepsSinister.length; i++) {
+        const step = Object.keys(drawStepsSinister[i]);
+        expect(path[i+1].props.x).toBe(Object.values(drawStepsSinister[i])[0][0]);
+        expect(path[i+1].props.y).toBe(Object.values(drawStepsSinister[i])[0][1]);
+      }
+    });
+
+    it(&apos;which should draw 2 Bends on a canvas when called with a count of 2&apos;, () =&gt; {
+      ctx.__clearDrawCalls();
+      twoBendDexter.draw(ctx);
+      const drawStepsDexter = twoBendDexter.drawInstructions(&apos;dexter&apos;);
+      const path = ctx.__getPath();
+      for (let i = 0; i &lt; drawStepsDexter.length; i++) {
+        const step = Object.keys(drawStepsDexter[i]);
+        if (i === 0 || i === 2 || i === 3) {
+          expect(path[i+1].props.x).toBe(Object.values(drawStepsDexter[i])[0][0] - 70);
+          expect(path[i+1].props.y).toBe(Object.values(drawStepsDexter[i])[0][1] + 70);
+        } else if (i === 1) {
+          expect(path[i+1].props.x).toBe(Object.values(drawStepsDexter[i])[0][0] - 70);
+          expect(path[i+1].props.y).toBe(Object.values(drawStepsDexter[i])[0][1] + 70);
+        }
+      }
+    });
+
+    it(&apos;which should draw a party if that option is passed, ignoring the count parameter&apos;, () =&gt; {
+      ctx.__clearDrawCalls();
+      partyBend.draw(ctx);
+      const path = ctx.__getPath();
+      const drawStepsParty = partyBend.drawInstructions(&apos;sinister&apos;);
+      for (let i = 0; i &lt; drawStepsParty.length; i++) {
+        const step = Object.keys(drawStepsParty[i]);
+        expect(path[i+1].props.x).toBe(Object.values(drawStepsParty[i])[0][0]);
+        expect(path[i+1].props.y).toBe(Object.values(drawStepsParty[i])[0][1]);
+      }
+    });
+
+    it(&apos;which should draw a border if that option is passed without a party option&apos;, () =&gt; {
+      // Basically we just need to watch the events and make sure the draw steps happen twice.
+      // That&apos;s the signal that a border was drawn, and then the main Bend was drawn on top.
+      ctx.__clearEvents();
+      ctx.__clearDrawCalls();
+      singleBendDexter.draw(ctx);
+      const events = ctx.__getEvents();
+      const drawSteps = singleBendDexter.drawInstructions(&apos;dexter&apos;);
+      for (let i = 1; i &lt; events.length; i++) {
+        if (Object.keys(events[i]) === &apos;moveTo&apos; || Object.keys(events[i] === &apos;lineTo&apos;)) {
+          let step;
+          if (i &lt; drawSteps.length) {
+            step = Object.keys(drawSteps[i]);
+            expect(events[i+1].props.x).toBe(Object.values(drawSteps[i])[0][0]);
+            expect(events[i+1].props.y).toBe(Object.values(drawSteps[i])[0][1]);
+          }
+        }
+      }
+    });
+
+  });
+
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

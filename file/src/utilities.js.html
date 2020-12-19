@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/utilities.js | @carwin/flag-generator</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A flag generator"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@carwin/flag-generator"><meta property="twitter:description" content="A flag generator"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/division.js~Division.html">Division</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertHex">convertHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-findGreaterNumber">findGreaterNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCanvas">generateCanvas</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateColor">generateColor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCount">generateCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeed">generateSeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeedMultiplier">generateSeedMultiplier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLastDigit">getLastDigit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexToRgb">hexToRgb</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-modifySeed">modifySeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processAspectRatioString">processAspectRatioString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-pseudoShuffle">pseudoShuffle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomHex">randomHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setDimensionsFromAspectObject">setDimensionsFromAspectObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-settings">settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorObject">ColorObject</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#divisions">divisions</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Bend.js~Bend.html">Bend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Border.js~Border.html">Border</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Canton.js~Canton.html">Canton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Chevron.js~Chevron.html">Chevron</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Cross.js~Cross.html">Cross</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fesses.js~Fesses.html">Fesses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fusil.js~Fusil.html">Fusil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Lozenge.js~Lozenge.html">Lozenge</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pales.js~Pales.html">Pales</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pall.js~Pall.html">Pall</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Saltire.js~Saltire.html">Saltire</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/utilities.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @file Utilities for flag generation.
+ */
+
+import seedrandom from &apos;seedrandom&apos;;
+import settings from &apos;./settings&apos;;
+import tinycolor from &apos;tinycolor2&apos;;
+
+/**
+ * Utilities for flag generation.
+ *
+ * @module flag-generator/utilities
+ */
+
+/**
+ * Generate the seed from a seed string.
+ *
+ * @function
+ * @example
+ * // Returns 0.8112494706388412
+ * generateSeed(&apos;test&apos;);
+ * @param {string} seedString - A string on which to run the prng function.
+ */
+export const generateSeed = (seedString) =&gt; {
+  const seed = typeof seedString !== &apos;undefined&apos; ? seedrandom(seedString, {state: true}) : seedrandom(Math.floor(Math.random() * 1e9).toString(), {state: true});
+
+  // settings.seed = seed();
+  return seed();
+}
+/**
+ * Generates a seed multiplier converting the characters of the provided string to numbers name.
+ *
+ * @function
+ * @example
+ * // Returns 0.5363260631705106
+ * generateSeedMultiplier(&apos;Border&apos;);
+ * @param {string} str - A string value to turn into charcodes.
+ * @returns {number} A multiplier to be used with seed multiplication based decision making.
+ * @todo I&apos;ve read somewhere that parseFloat is dangerous without radx, I should figure out if that&apos;s true.
+ * @todo: handle the case where settings.seed may not be set.
+ */
+export const generateSeedMultiplier = (seed, str) =&gt; {
+  // Make sure the string is a string.
+  str = str.toString();
+  // Add each character to an array.
+  let multiplier = &apos;&apos;;
+  const strArray = str.toString().split(&apos;&apos;);
+  // Loop over the array of characters, turn them into a number, and add them to a string.
+  // I could probably do this more simply with array.map() or reduce() somehow.
+  for (let i = 0; i &lt; strArray.length; i++) {
+      multiplier = multiplier + strArray[i].charCodeAt(0);
+  }
+  // Turn our multiplier string into an actual number.
+  multiplier = parseFloat(&apos;.&apos; + multiplier * seed);
+  return multiplier;
+}
+
+/**
+ * Modify a seed by multiplying it by a value.
+ *
+ * @function
+ * @example
+ * // Returns 0.05483563
+ * modifySeed(0.2602354456965794, 0.2107154537);
+ * @param {number} seed - The seed number on which generation depends.
+ * @param {number} seedMultiplier - The multiplier used to alter the seed to generate values.
+ * @returns {number} - The product of seed and seedMultiplier.
+ */
+// export const modifySeed = (seed, seedMultiplier) =&gt; seed * seedMultiplier
+export const modifySeed = (seed, seedMultiplier) =&gt; {
+  // console.log(&apos;seed to mod&apos;, seed);
+  // console.log(&apos;multi&apos;, seedMultiplier);
+  return seed * seedMultiplier
+}
+
+
+/**
+ * Gets the last digit from a number.
+ *
+ * @function
+ * @example
+ * // Returns 7
+ * getLastDigit(.2357);
+ * @param {number} n - A number.
+ * @returns {number} The last digit of n.
+ */
+export const getLastDigit = (n) =&gt; +(n.toString().substr(-1));
+
+
+/**
+ * Generate a random hex color based on the seed.
+ *
+ * @function
+ * @example
+ * // returns #2b32ad
+ * randomHex(0.8112494706388412);
+ * @param {number} seed - The prng generated seed value under 1.
+ * @param {number} seedModifier - A number used to perform modifications to the seed.
+ * @returns {string} The pseudo-randomly generated hexadecimal color value.
+ */
+export const randomHex = (seed, seedModifier) =&gt; {
+    return &apos;#&apos;+((modifySeed(seed, seedModifier) % 1) * 0xFFFFFF &lt;&lt; 0).toString(16).padStart(6, &apos;0&apos;);
+};
+
+/**
+ * Turn a hexadecimal color string into an rgb() object.
+ *
+ * @function
+ * @example
+ * // returns {r: 255, g: 255, b: 255}
+ * hexToRgb(&apos;#ffffff&apos;);
+ * @param {string} hex - A hexadecimal color string.
+ * @returns {{r: number, b: number, g: number}} - An object containing RGB keys.
+ */
+export function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
+
+/**
+ * Convert a hexadecimal color string to an rgb() string.
+ *
+ * @function
+ * @example
+ * // Returns rgb(255, 255, 255)
+ * convertHex(&apos;#ffffff&apos;);
+ * @param {string} hex - A hexadecimal color string.
+ * @returns {string} - An RGB color string.
+ */
+export const convertHex = (hex) =&gt; {
+    const rgbObject = hexToRgb(hex);
+    return &apos;rgb(&apos; + rgbObject.r + &apos;, &apos; + rgbObject.g + &apos;, &apos; + rgbObject.b + &apos;)&apos;;
+}
+/**
+ * A color object.
+ *
+ * @typedef {object} ColorObject
+ * @property {object} analogous - An object containing 6 hexadecimal color strings analogous to the originally generated color.
+ * @property {string} color - A hexadecimal color value generated from the seed and a seedMultiplier.
+ * @property {string} complement - A complement hexadecimal color value to the color string.
+ * @property {object} monochromatic - An object containing 6 hexadecimal color strings describing the monochrome range of the original generated color.
+ * @property {object} splitComplement - An object containing the originally generated color and two hexadecimal color string complements.
+ * @property {object} tetrad - An object containing the originally generated color&apos;s tetrad.
+ * @property {object} triad - An object containing the originally generated color&apos;s triad.
+ */
+/**
+ * Generates a color object from a modified seed using the tinycolor2 library.
+ *
+ * @function
+ * @example
+ * // Generates a ColorObject with a primary color key of #575109;
+ * const colorObject = generateColor(80857473, 0.06556305047688744);
+ * @param {number} seedMultiplier - The multiplier used to alter the seed to generate values.
+ * @param {number} seed - The seed number on which generation depends.
+ * @returns {...ColorObject} A {@link module:flag-generator/utilities~ColorObject}.
+ */
+export const generateColor = (hex, seedMultiplier = 80857473, seed) =&gt; {
+    let generated = randomHex(seed, seedMultiplier);
+    if (/^#/.test(hex)) {
+      generated = hex;
+    }
+    const color = {
+        color: tinycolor(generated).toHexString(),
+        complement: tinycolor(generated).complement().toHexString(),
+        splitComplement: tinycolor(generated).splitcomplement().map((sc) =&gt; sc.toHexString()),
+        triad: tinycolor(generated).triad().map((tr) =&gt; tr.toHexString()),
+        tetrad: tinycolor(generated).tetrad().map((te) =&gt; te.toHexString()),
+        analogous: tinycolor(generated).analogous().map((an) =&gt; an.toHexString()),
+        monochromatic: tinycolor(generated).monochromatic().map((mo) =&gt; mo.toHexString()),
+    }
+    return color;
+}
+
+/**
+ * Shuffles an array predictably using the Fisher Yates shuffle algorithm.
+ *
+ * @function
+ * @example
+ * // Returns [1, 2, 3, 5, 4]
+ * const originalArray = [1, 2, 3, 4, 5]
+ * const shuffledArray = pseudoShuffle(originalArray, 0.7243609520746538);
+ * @param {Array} arr - The array to be shuffled.
+ * @param {number} seed - The pseudorandom string used to predictabbly apply the algorithm.
+ * @returns {Array} The arr parameter, but shuffled.
+ */
+export const pseudoShuffle = (arr, seed) =&gt; {
+    let m = arr.length;
+    let t, i
+
+    while (m) {
+        i = Math.floor(seed * m--)
+        t = arr[m]
+        arr[m] = arr[i]
+        arr[i] = t
+    }
+    return arr;
+};
+/**
+ * Takes an aspect ratio string, e.g.: 1:2, 2:3, 3:5, and returns an object with height (h) and width (w) keys.
+ *
+ * @function
+ * @example
+ * // Returns
+ * // {
+ * //     h: 3,
+ * //     w: 5,
+ * // }
+ * const aspectObject = processAspectRatioString(&apos;3:5&apos;);
+ * @param {string} aspect - A string describing a ratio.
+ * @returns {object} An aspect ratio object containing height (h) and width (w) keys from the aspect ratio string.
+ * @todo This function could be shortened significantly with a map callback.
+ */
+export const processAspectRatioString = (aspect) =&gt; {
+  aspect = aspect.toString().split(&apos;:&apos;);
+  let aspectObj = {};
+  for (let i = 0; i &lt; aspect.length; i++) {
+    switch(i) {
+      case 0:
+        aspectObj.h = +(aspect[i]);
+        break;
+      case 1:
+        aspectObj.w = +(aspect[i]);
+        break;
+      default:
+        throw new Error(&apos;Could not process given aspect ratio string.&apos;);
+      }
+  }
+  return aspectObj;
+}
+
+/**
+ * Turn an aspect object into more realistic dimensions.
+ *
+ * @function
+ * @example
+ * // Returns
+ * // {
+ * //   h: 300,
+ * //   w: 500,
+ * // }
+ * const dimensions = setDimensionsFromAspectObject({h: 3, w: 5});
+ * @param {object} aspect - An aspect object.
+ * @param {number} multiplier - A number to multiply the aspect keys by. Defaults to 100.
+ * @returns {object} An object containing height (h) and width (w) keys representing dimensions.
+ */
+export const setDimensionsFromAspectObject = (aspect, multiplier = 100) =&gt; ({
+  h: aspect.h * multiplier,
+  w: aspect.w * multiplier
+});
+
+/**
+ * Creates a canvas element and append it to the document body.
+ *
+ * @function
+ * @example
+ * // Creates and appends the canvas with an id of &apos;myCanvas&apos;.
+ * generateCanvas(document, &apos;myCanvas&apos;);
+ * @param {object} document - A document object.
+ * @param {string} id - The Id to give the created canvas element.
+ * @param {object} dimensions - An object containing height(h) and width (w) keys.
+ */
+export const generateCanvas = (document, parentID, canvasID, dimensions) =&gt; {
+  const parent = document.getElementById(parentID);
+  const canvas = document.createElement(&apos;canvas&apos;);
+  canvas.setAttribute(&apos;id&apos;, canvasID);
+  canvas.setAttribute(&apos;style&apos;, &apos;border: 1px solid black;&apos;);
+  canvas.setAttribute(&apos;width&apos;, dimensions.w);
+  canvas.setAttribute(&apos;height&apos;, dimensions.h);
+  parent.appendChild(canvas);
+}
+/**
+ * Generates a number used for decision making based on the seed and a given multiplier.
+ *
+ * @function
+ * @example
+ * // Returns 1
+ * generateCount(5, 0.8112494706388412, 0.6568774660735);
+ * @param {number} limit - The maximum value of the count to be returned. Values above 9 are ignored.
+ * @param {number} seedMultiplier - The multiplier used to alter the seed to generate values.
+ * @param {number} seed - The seed number on which generation depends.
+ * @returns {number} A single digit number between 0 and 9.
+ */
+export const generateCount = (limit, seedMultiplier, seed) =&gt; {
+    const modifiedSeed = modifySeed(seed, seedMultiplier);
+    let generated = getLastDigit(modifiedSeed);
+    if (generated &gt; limit || generated === 0) {
+        generated = 1;
+    }
+    return generated;
+}
+
+export const findGreaterNumber = (a, b) =&gt; {
+  let greater;
+  greater = a &gt;= b ? a : b;
+  return greater;
+}
+
+// /**
+//  *
+//  * @returns {SVGSVGElement}
+//  */
+// const makeSVG = () =&gt; {
+//     console.log(&apos;Make an SVG.&apos;);
+//
+//     let svg1 = document.createElementNS(&quot;http://www.w3.org/2000/svg&quot;, &quot;svg&quot;);
+//     svg1.setAttribute(&quot;width&quot;, &quot;400&quot;);
+//     svg1.setAttribute(&quot;height&quot;, &quot;400&quot;);
+//     svg1.setAttribute(&quot;viewBox&quot;, &quot;0 0 800 300&quot;);
+
+//     let cir1 = document.createElementNS(&quot;http://www.w3.org/2000/svg&quot;, &quot;circle&quot;);
+//     cir1.setAttribute(&quot;cx&quot;, 50);
+//     cir1.setAttribute(&quot;cy&quot;, 50);
+//     cir1.setAttribute(&quot;r&quot;, 50);
+//
+//     svg1.appendChild(cir1);
+//
+//     return svg1;
+//
+// }
+//
+//
+//
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/divisions/Pall.js | @carwin/flag-generator</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A flag generator"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@carwin/flag-generator"><meta property="twitter:description" content="A flag generator"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/division.js~Division.html">Division</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertHex">convertHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-findGreaterNumber">findGreaterNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCanvas">generateCanvas</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateColor">generateColor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCount">generateCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeed">generateSeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeedMultiplier">generateSeedMultiplier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLastDigit">getLastDigit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexToRgb">hexToRgb</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-modifySeed">modifySeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processAspectRatioString">processAspectRatioString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-pseudoShuffle">pseudoShuffle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomHex">randomHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setDimensionsFromAspectObject">setDimensionsFromAspectObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-settings">settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorObject">ColorObject</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#divisions">divisions</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Bend.js~Bend.html">Bend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Border.js~Border.html">Border</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Canton.js~Canton.html">Canton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Chevron.js~Chevron.html">Chevron</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Cross.js~Cross.html">Cross</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fesses.js~Fesses.html">Fesses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fusil.js~Fusil.html">Fusil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Lozenge.js~Lozenge.html">Lozenge</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pales.js~Pales.html">Pales</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pall.js~Pall.html">Pall</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Saltire.js~Saltire.html">Saltire</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/divisions/Pall.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @file Houses the class properties and methods for the Pall division.
+ */
+import * as Utilities from &apos;../utilities&apos;;
+import settings from &apos;../settings&apos;;
+import Division from &apos;../division&apos;;
+
+/** Pall pattern.
+ *
+ * @class
+ * @classdesc The Pall pattern describes a Y shape on the field, typically oriented so the top of the Y is on the left of the field.
+ * @augments Division
+ * @namespace Divisions.Pall
+ */
+export default class Pall extends Division {
+    /**
+     * Creates a Pall.
+     *
+     * @example
+     * // Creates a horizontally oriented, white Pall with a black border.
+     * const pall = new Pall(&apos;fesswise&apos;, &apos;#ffffff&apos;, true, 20, &apos;#000000&apos;);
+     * @param {string} direction - The orientation of the Pall. One of: fesswise, palewise, fesswiseReversed, palewiseReverse.
+     * @param {string} color - A hexadecimal color string.
+     * @param {number} width - A width value for drawing the division.
+     * @param {boolean} border - Whether or not to draw a border around the Pall.
+     * @param {number} borderWidth - The width of the border.
+     * @param {string} borderColor - A hexadecimal color string.
+     */
+  constructor(params = {seed, direction, color, width, border, borderWidth, borderColor}) {
+    super({seed: params.seed, count: 1, limit: 1, color: params.color});
+    this.border = params.border;
+    this.width = params.width;
+    this.direction = typeof params.direction !== &apos;undefined&apos; ? params.direction : this.generateDirection();
+    // this.borderWidth = borderWidth &gt; 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
+    this.borderWidth = params.borderWidth || 50;
+    this.borderColor = params.borderColor || Utilities.generateColor(undefined, .12345);
+  }
+    /**
+     * Generate a direction value for the Pall.
+     *
+     * @example
+     * // Returns &apos;palewiseReversed&apos;
+     * const newPale = new Pale();
+     * newPale.generateDirection(.1337)
+     * @param {number} seed - The seed number used for generated values.
+     * @returns {string} - One of: &apos;pallwise&apos;, &apos;fesswise&apos;, &apos;pallwiseReversed&apos;, &apos;fesswiseReversed&apos;.
+     */
+    generateDirection(seed = this.seed) {
+        let generated;
+        // let seedDigit = +(Math.round(this.seed * this.seedMultiplier).toString().substr(-1));
+        const seedDigit = Utilities.getLastDigit(Utilities.modifySeed(this.seed, this.seedMultiplier));
+        if (seedDigit &gt;=1 &amp;&amp; seedDigit &lt;= 4) {
+            generated = &apos;palewise&apos;;
+        } else if (seedDigit === 5 || seedDigit === 6) {
+            generated = &apos;fesswise&apos;;
+        } else if (seedDigit === 7 || seedDigit === 8) {
+            generated = &apos;palewiseReversed&apos;;
+        } else if (seedDigit === 0 || seedDigit === 9) {
+            generated = &apos;fesswiseReversed&apos;;
+        }
+        return generated;
+    }
+
+    /**
+     * Returns the proper draw function instructions for a given direction.
+     *
+     * @example
+     * // Returns drawInstructionsPalewise();
+     * const pall = new Pall();
+     * pall.drawInstructions(&apos;palewise&apos;);
+     * @param {string} direction - One of: &apos;fesswise&apos;, &apos;palewise&apos;, &apos;fesswiseReversed&apos;, &apos;palewiseReversed&apos;.
+     * @returns {Function} The draw instruction function corresponding to the direction.
+     */
+    drawInstructions(direction) {
+        let instructions;
+        switch (direction) {
+            case &apos;palewise&apos;:
+                instructions = this.drawInstructionsPalewise();
+                break;
+            case &apos;palewiseReversed&apos;:
+                instructions = this.drawInstructionsPalewise(true);
+                break;
+            case &apos;fesswise&apos;:
+                instructions = this.drawInstructionsFesswise();
+                break;
+            case &apos;fesswiseReversed&apos;:
+                instructions = this.drawInstructionsFesswise(true);
+                break;
+        }
+        return instructions;
+    }
+
+    /**
+     * Generates the draw instructions for the palewise and palewiseReversed directions.
+     *
+     * @example
+     * // Returns an instruction set for the palewise direction based on the flag dimensions.
+     * // [
+     * //     {moveTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * //     {moveTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * // ]
+     * const pall = new Pall();
+     * const instructions = pall.drawInstructionsPalewise();
+     * @param {boolean} reversed - Whether or not to return the reverse draw instructions.
+     * @returns {Array} An array of objects containing canvas drawing instructions.
+     */
+    drawInstructionsPalewise(reversed) {
+        let instructions;
+        if (!reversed) {
+            instructions = [
+                {moveTo: [0, 0]},
+                {lineTo: [settings.flagWidth / 2, settings.flagHeight / 2]},
+                {lineTo: [0, settings.flagHeight]},
+                {moveTo: [settings.flagWidth / 2, settings.flagHeight / 2]},
+                {lineTo: [settings.flagWidth, settings.flagHeight / 2]},
+            ]
+        } else {
+            instructions = [
+                {moveTo: [settings.flagWidth, 0]}, // start top-right
+                {lineTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // draw to center
+                {lineTo: [settings.flagWidth, settings.flagHeight]}, // draw to bottom right
+                {moveTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // move to center
+                {lineTo: [0, settings.flagHeight / 2]}, // Draw to center left side
+            ]
+        }
+
+        return instructions;
+    }
+    /**
+     * Generates the draw instructions for the fesswise and fesswiseReversed directions.
+     *
+     * @example
+     * // Returns an instruction set for the fesswise direction based on the flag dimensions.
+     * // [
+     * //     {moveTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * //     {moveTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * // ]
+     * const pall = new Pall();
+     * const instructions = pall.drawInstructionsFesswise();
+     * @param {boolean} reversed - Whether or not to return the reverse draw instructions.
+     * @returns {Array} An array of objects containing canvas drawing instructions.
+     */
+    drawInstructionsFesswise(reversed) {
+        let instructions;
+        if (!reversed) {
+            instructions = [
+                {moveTo: [0, 0]}, // start top left
+                {lineTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // draw to center
+                {lineTo: [settings.flagWidth, 0]}, // draw to top right
+                {moveTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // move to center
+                {lineTo: [settings.flagWidth / 2, settings.flagHeight]}, // draw to center bottom
+            ];
+        } else {
+            instructions = [
+                {moveTo: [0, settings.flagHeight]}, // start bottom left
+                {lineTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // draw to center
+                {lineTo: [settings.flagWidth, settings.flagHeight]}, // draw to bottom right
+                {moveTo: [settings.flagWidth / 2, settings.flagHeight / 2]}, // move to center
+                {lineTo: [settings.flagWidth / 2, settings.flagHeight - settings.flagHeight]}, // draw to center top
+            ];
+        }
+        return instructions;
+    }
+
+    /**
+     * Draws the Pall pattern on a canvas.
+     *
+     * @example
+     * // Draws the Pall pattern.
+     * pall.draw(ctx);
+     * @param {object} ctx - An object containing a canvas context.
+     */
+    draw(ctx) {
+        const drawSteps = this.drawInstructions(this.direction);
+        const pallWidth = this.width || Math.round(this.seed * 100);
+        ctx.beginPath();
+        // If there&apos;s a border, draw it first with a larger width.
+        if (this.border) {
+            for (let i = 0, len = drawSteps.length; i &lt; len; i++) {
+                const step = Object.keys(drawSteps[i]);
+                const stepParams = Object.values(drawSteps[i])[0];
+                ctx[step](...stepParams);
+            }
+            ctx.lineWidth = pallWidth + this.borderWidth;
+            ctx.strokeStyle = this.color.complement;
+            ctx.stroke();
+        }
+
+        for (let i = 0, len = drawSteps.length; i &lt; len; i++) {
+            const step = Object.keys(drawSteps[i]);
+            const stepParams = Object.values(drawSteps[i])[0];
+            ctx[step](...stepParams);
+        }
+        ctx.strokeStyle = this.color.color;
+        ctx.lineWidth = pallWidth;
+        ctx.stroke();
+    }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

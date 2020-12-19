@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/divisions/Bend.js | @carwin/flag-generator</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A flag generator"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@carwin/flag-generator"><meta property="twitter:description" content="A flag generator"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/division.js~Division.html">Division</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertHex">convertHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-findGreaterNumber">findGreaterNumber</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCanvas">generateCanvas</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateColor">generateColor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateCount">generateCount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeed">generateSeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-generateSeedMultiplier">generateSeedMultiplier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLastDigit">getLastDigit</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hexToRgb">hexToRgb</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-modifySeed">modifySeed</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-processAspectRatioString">processAspectRatioString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-pseudoShuffle">pseudoShuffle</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomHex">randomHex</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setDimensionsFromAspectObject">setDimensionsFromAspectObject</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-settings">settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ColorObject">ColorObject</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#divisions">divisions</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Bend.js~Bend.html">Bend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Border.js~Border.html">Border</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Canton.js~Canton.html">Canton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Chevron.js~Chevron.html">Chevron</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Cross.js~Cross.html">Cross</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fesses.js~Fesses.html">Fesses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Fusil.js~Fusil.html">Fusil</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Lozenge.js~Lozenge.html">Lozenge</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pales.js~Pales.html">Pales</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Pall.js~Pall.html">Pall</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/divisions/Saltire.js~Saltire.html">Saltire</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/divisions/Bend.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * @file Houses the class properties and methods for the Bend division.
+ */
+import * as Utilities from &apos;../utilities&apos;;
+import settings from &apos;../settings&apos;;
+import Division from &apos;../division&apos;;
+
+/**
+ * Bends pattern.
+ *
+ * @class
+ * @classdesc The Bends pattern describes a single diagonal line in either the dexter or sinister direction.
+ * @augments Division
+ * @namespace Divisions.Bend
+ */
+export default class Bend extends Division {
+    /**
+     * Creates a Bend.
+     *
+     * @example
+     * // Creates two white Bends across the flag with black borders
+     * const bend = new Bend(2, &apos;dexter&apos;, false, &apos;#ffffff&apos;, undefined, true, 20, &apos;#000000&apos;);
+     * // Creates a single Bend division as a party of the flag.
+     * const bendFilled = new Bend(1, &apos;sinister&apos;, true, &apos;#ffffff&apos;);
+     * @param {number} count - The number of divisions to draw.
+     * @param {string} direction - The orientation of the Pall. One of: dexter, sinister.
+     * @param {boolean} party - Whether this division should take up an entire diagonal half of the flag.
+     * @param {string} color - A hexadecimal color string.
+     * @param {number} width - A width value for drawing the division.
+     * @param {boolean} border - Whether or not to draw a border around the Pall.
+     * @param {number} borderWidth - The width of the border.
+     * @param {string} borderColor - A hexadecimal color string.
+     * @todo Enhance the generation of border widths, possibly extrapolate whatever we come up with into parent Division class.
+     */
+  constructor(params = {seed, limit, count: 1, direction, party: false, color, width, border, borderWidth, borderColor}) {
+    let limit;
+    if (params.party) {
+      limit = 1;
+    } else {
+      limit = params.limit ? params.limit : 3;
+    }
+
+    super({seed: params.seed, count: params.count, limit, color: params.color});
+
+    this.party = params.party;
+    this.border = params.border;
+    this.width = params.width;
+    this.direction = typeof params.direction !== &apos;undefined&apos; ? params.direction : this.generateDirection(this.seed);
+    // this.borderWidth = borderWidth &gt; 0 ? borderWidth : this.generateSaltireWidth((settings.seed * .1234));
+    this.borderWidth = params.borderWidth || 50;
+    this.borderColor = params.borderColor || Utilities.generateColor(undefined, .50000);
+  }
+    /**
+     * Generate a direction value for the Bend.
+     *
+     * @example
+     * // Returns &apos;dexter&apos;
+     * const newBend = new Bend();
+     * newBend.generateDirection(.1337)
+     * @param {number} seed - The seed number used for generated values.
+     * @returns {string} - One of: &apos;dexter&apos;, &apos;sinister&apos;.
+     */
+    generateDirection(seed = this.seed) {
+      let generated;
+      const seedDigit = Utilities.getLastDigit(Utilities.modifySeed(seed, this.seedMultiplier));
+      if (seedDigit &gt;=0 &amp;&amp; seedDigit &lt;= 5) {
+        generated = &apos;dexter&apos;;
+      } else if (seedDigit &gt;=6 &amp;&amp; seedDigit &lt;= 9) {
+        generated = &apos;sinister&apos;;
+      } else {
+        throw new Error(&apos;seedDigit was not between 0 and 9&apos;);
+      }
+      return generated;
+    }
+    /**
+     * Returns the proper draw function instructions for a given direction.
+     *
+     * @example
+     * // Returns drawInstructionsDexter();
+     * const bend = new Bends();
+     * chevron.drawInstructions(&apos;dexter&apos;);
+     * @param {string} direction - One of: dexter, sinister.
+     * @returns {Function} The draw instruction function corresponding to the direction.
+     */
+    drawInstructions(direction) {
+      let instructions;
+      switch (direction) {
+        case &apos;dexter&apos;:
+          instructions = this.drawInstructionsDexter();
+          break;
+        case &apos;sinister&apos;:
+          instructions = this.drawInstructionsSinister();
+          break;
+        default:
+          throw new Error(&apos;Direction passed to Bend\&apos;s drawInstructions method was not one of \&apos;sinister\&apos; or \&apos;dexter\&apos;.&apos;);
+        }
+        return instructions;
+    }
+
+    /**
+     * Generates the draw instructions for the palewise and palewiseReversed directions.
+     *
+     * @example
+     * // Returns an instruction set for the palewise direction based on the flag dimensions.
+     * // [
+     * //     {moveTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * // ]
+     * const bends = new Bends();
+     * const instructions = bends.drawInstructionsDexter();
+     * @param {boolean} party - Whether or not the division should be filled.
+     * @returns {Array} An array of objects containing canvas drawing instructions.
+     */
+    drawInstructionsDexter(party = this.party) {
+        let instructions;
+        if (!party) {
+            instructions = [
+                {moveTo: [0, 0]}, // start top-left
+                {lineTo: [settings.flagWidth, settings.flagHeight]}, // draw to bottom-right
+            ]
+        } else {
+            instructions = [
+                {moveTo: [0, 0]}, // start top-left
+                {lineTo: [settings.flagWidth, settings.flagHeight]}, // draw to bottom-right
+                {lineTo: [0, settings.flagHeight]}, // draw to bottom-left
+                {lineTo: [0, 0]}, // draw to top-left
+            ]
+        }
+        return instructions;
+    }
+    /**
+     * Generates the draw instructions for the sinister.
+     *
+     * @example
+     * // Returns an instruction set for the sinister direction based on the flag dimensions.
+     * // [
+     * //     {moveTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * //     {lineTo: [x, y]},
+     * // ]
+     * const bends = new Bends();
+     * const instructions = bends.drawInstructionsSinister();
+     * @param {boolean} party - Whether or not the division should be filled.
+     * @returns {Array} An array of objects containing canvas drawing instructions.
+     */
+    drawInstructionsSinister(party = this.party) {
+        let instructions;
+        if (!party) {
+            instructions = [
+                {moveTo: [settings.flagWidth, 0]}, // start top right
+                {lineTo: [0, settings.flagHeight]}, // draw to bottom left
+            ];
+        } else {
+            instructions = [
+                {moveTo: [settings.flagWidth, 0]}, // start top right
+                {lineTo: [0, settings.flagHeight]}, // draw to bottom left
+                {lineTo: [settings.flagWidth, settings.flagHeight]}, // draw to bottom right
+                {lineTo: [settings.flagWidth, 0]}, // draw to top right
+            ];
+        }
+        return instructions;
+    }
+
+    /**
+     * A semi-curried function that applies the passed arguments to drawSteps.
+     * Used as a callback for array.map() to pass arguments into the map function&apos;s
+     * callback function.
+     *
+     * @example
+     * // Applies a shift width of 100 to a drawStep&apos;s parameters.
+     * for (let i = 0, len = drawSteps.length; i &lt; len; i++) {
+           const step = Object.keys(drawSteps[i]);
+           const stepParams = Object.values(drawSteps[i])[0];
+           ctx[step](...stepParams.map(shiftStep(positionShift, &apos;sinister&apos;, &apos;dexter&apos;)));
+     * }
+     * @param {number} positionShift - The value by which we will shift the inner function&apos;s p parameter.
+     * @param {string} direction - The string value of the current operating direction.
+     * @param {string} oddDirection - The odd-man-out direction that needs special processing.
+     * @returns {Function} A callback function that operates using the values of shiftStep().
+     * @todo The shift position is based entirely on 3:5 flags, make it more... Betterer...
+     * @todo Come up with a better description, and maybe a better name for the oddDirection parameter.
+     */
+    shiftStep(positionShift, direction, oddDirection) {
+      return (p, index) =&gt; {
+        // If the direction is the oddDirection, we need to add the positionShift to
+        // the x coordinate (0) and subtract the positionShift from the y coordinate (1).
+        let calculated;
+        if (direction === oddDirection) {
+            calculated = index === 0 ? p + positionShift : p - positionShift;
+        }
+            // If the direction is not the oddDirection, we can simply add the positionShift
+        // to both the x and y coords.
+        else {
+            calculated = p + positionShift;
+        }
+        return calculated;
+      }
+    }
+    /**
+     * Draws the Chevron division on a canvas.
+     *
+     * @example
+     * // Draws the Bends division on the canvas.
+     * const bend = new Bend();
+     * bend.draw(ctx);
+     * @param {object} ctx - An object containing a canvas context.
+     */
+    draw(ctx) {
+        const drawSteps = this.drawInstructions(this.direction);
+        const bendWidth = this.width || Math.round(this.seed * 100);
+        ctx.beginPath();
+
+        // Bends has a ton of possible options, so we start by looping over the count.
+        for (let i = 0, len = this.count; i &lt; len; i++) {
+            // If we have more than one bend to draw, we need to set some
+            // offsets for the second and third bends. That&apos;s what&apos;s happening
+            // here with the switch and the positionShift variable.
+            let positionShift = 0;
+            // If there are 2 bends, split them somewhat equally from the center.
+            if (this.count === 2) {
+                switch (true) {
+                    case i === 0 &amp;&amp; !this.party:
+                        positionShift = -70;
+                        break;
+                    case i === 1:
+                        positionShift = 70;
+                        break;
+                }
+                // If there are 3 bends, draw one in the center and the others spaced equally from it.
+            } else if (this.count === 3) {
+                switch (i) {
+                    case 0:
+                        positionShift = 0;
+                        break;
+                    case 1:
+                        positionShift = -100;
+                        break;
+                    case 2:
+                        positionShift = 100;
+                        break;
+                }
+            }
+            // Now that we have that out of the way, let&apos;s do some drawing.
+            // Loop over the draw steps. For each step, apply the position shift
+            // we decided on above.
+            //
+            // We&apos;ll start with borders, since they sit behind the main drawing.
+            // If there&apos;s a border, draw it first with a larger width.
+            if (this.border &amp;&amp; !this.party) {
+                for (let k = 0, len3 = drawSteps.length; k &lt; len3; k++) {
+                    const step = Object.keys(drawSteps[k]);
+                    const stepParams = Object.values(drawSteps[k])[0];
+                    // This is a pretty complicated set of instructions. If you&apos;re
+                    // having trouble following the logic, it&apos;s repeated and
+                    // documented in the shiftStep function definition.
+                    // Basically, we&apos;re applying the positionShift to the bend coords.
+                    ctx[step](...stepParams.map(this.shiftStep(positionShift, this.direction, &apos;dexter&apos;)));
+                }
+                ctx.lineWidth = bendWidth + this.borderWidth;
+                ctx.strokeStyle = this.color.complement;
+                ctx.stroke();
+            }
+
+            // Keep in mind this is a loop within a loop, so for every bend (outer loop),
+            // we&apos;re running each of the draw steps (inner loop).
+            for (let j = 0, len2 = drawSteps.length; j &lt; len2; j++) {
+                // Get the method name from the drawStep&apos;s key.
+                const step = Object.keys(drawSteps[j]);
+                // Get the parameters to apply to each method. These are all x,y coordinates.
+                const stepParams = Object.values(drawSteps[j])[0];
+                // Run the method off of the ctx object, that&apos;s what it references!
+                // For the parameters, send them all using the ... notation, and then run
+                // an array.map() callback to apply the position shift.
+                ctx[step](...stepParams.map(this.shiftStep(positionShift, this.direction, &apos;dexter&apos;)));
+            }
+            // If we&apos;re drawing the division as a party, we can only have a single bend.
+            // Instead of stroking the path, we&apos;re going to fill it so that it takes up
+            // a diagonal half of the entire flag.
+            if (this.party) {
+                ctx.fillStyle = this.color.color;
+                ctx.fill();
+                // Since we can only have 1 Bend if we&apos;re drawing it as a party, let&apos;s break
+                // the loop as soon as we&apos;ve created it.
+                break;
+            }
+                // If we don&apos;t want a party per bend, we&apos;ll stroke the lines we drew during the
+                // earlier drawStep stage, then continue on with the loop in case there are
+            // more bends to draw.
+            else {
+                ctx.strokeStyle = this.color.color;
+                ctx.lineWidth = bendWidth;
+                ctx.stroke();
+            }
+        }
+    }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
