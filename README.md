@@ -1,6 +1,12 @@
 # Flag Generator
 
+[![codecov](https://codecov.io/gh/carwin/flag-generator/branch/master/graph/badge.svg?token=29CLOQ51S7)](https://codecov.io/gh/carwin/flag-generator)
+
 The `flag-generator` package is a vexillography tool that provides a number of classes and functions to facilitate the creation of flags using the Canvas API.
+
+## Documentation
+
+The documentation for this package is hosted on GitHub Pages and can be found here: [Documentation](https://carwin.github.io/flag-generator).
 
 ## Usage
 
